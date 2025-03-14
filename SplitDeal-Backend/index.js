@@ -31,7 +31,7 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/sub-category", subCategoryRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/deal", require("./src/routes/dealRoutes"));
-app.use("api/group", require("./src/routes/groupRoutes"));
+app.use("/api/group", require("./src/routes/groupRoutes"));
 
 
 const PORT = process.env.PORT || 5000;
