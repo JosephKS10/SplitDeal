@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 
 const authRoutes = require('./src/routes/authRoutes');
+const userRoutes = require("./src/routes/userRoutes");
 
 // Middleware
 app.use(cors());
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
     res.send('Backend is running...');
 });
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 
 const PORT = process.env.PORT || 5000;
