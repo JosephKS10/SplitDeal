@@ -1,22 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
-import { IconCloudDemo } from './components/IconCloudDemo'
-import Navbar from './components/Navbar'
-import LandingPage from './components/LandingPage'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ContactUs from "./Pages/ContactUs";
+import NotFound from "./Pages/NotFound";
+import Home from "./Pages/Home";
+import AboutUs from "./Pages/AboutUs";
+import LandingPage from "./components/LandingPage";
+import Navbar from "./components/Navbar";
 
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const RouterPage = () => {
   return (
-    <>
-      <Navbar/>
-      <LandingPage/>
-    </>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   )
 }
 
-export default App
+export default RouterPage;
