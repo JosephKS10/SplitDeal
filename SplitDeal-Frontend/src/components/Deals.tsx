@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ChipTabs from "./ChipTabs";
+import ApiUrls from "../Api/ApiUrls";
 
 export default function Deals({
   selectedCategory,
@@ -14,7 +15,7 @@ export default function Deals({
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "https://seemed-commands-isolated-filed.trycloudflare.com/api/category/get-categories"
+          ApiUrls.getCategory
         );
         const data = await response.json();
         setCategories(data);
@@ -41,7 +42,7 @@ export default function Deals({
   const fetchDeals = async (categoryId) => {
     try {
       const response = await fetch(
-        `https://seemed-commands-isolated-filed.trycloudflare.com/api/deal/get-deals-by-category/${categoryId}`
+        `${ApiUrls.getDeal}/${categoryId}`
       );
       const data = await response.json();
       setDeals(data);
@@ -72,37 +73,35 @@ export default function Deals({
               onMouseLeave={() => setHoveredDeal(null)} // Reset hovered deal
             >
               {/* Show Expiry and Created Date on hover */}
-              <div className="relative">
-  <img
-    className="lg:h-42 md:h-32 p-2 w-full border-b-2 border-gray-200 object-center transition-transform duration-300 transform hover:scale-105"
-    src={deal.storeLogo}
-    alt={deal.dealName}
-  />
-  {/* {hoveredDeal === deal._id && (
-    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent flex flex-col justify-end p-2">
-      <p className="text-white text-sm">
-        Expiry Date: {new Date(deal.expiryDate).toLocaleDateString()}
-      </p>
-      <p className="text-white text-sm">
-        Created At: {new Date(deal.createdAt).toLocaleDateString()}
-      </p>
-    </div>
-  )} */}
-</div>
-
+              <div className="relative border-b-2 flex justify-center item-center" style={{borderColor:"grey"}}>
+                <img
+                  className="lg:h-42 md:h-32 m-2  border-gray-200 object-center transition-transform duration-300 transform hover:scale-105"
+                  src={deal.storeLogo}
+                  alt={deal.dealName}
+                />
+              </div>
 
               <div className="p-5 flex flex-col flex-grow">
                 <h2 className="tracking-widest border-gray-200 text-xs title-font font-medium text-gray-400 mb-1">
                   {deal.storeName}
                 </h2>
-                <h1 className="title-font py-4 text-lg font-bold text-neutral-900 mb-3">
+                <h1 className="title-font pt-4 text-lg font-bold text-neutral-900 mb-3">
                   {deal.dealName}
                 </h1>
-                <p className="leading-relaxed mb-3">{deal.dealDesc}</p>
+                <p className="leading-relaxed mb-3">{deal.storeLocation}</p>
 
-               
+                <p className="leading-relaxed mb-3">
+                  Expiry Date:<span> </span>
+                  <span className="font-semibold">
+                    {new Date(deal.expiryDate).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </p>
 
-                <div className="flex items-center flex-wrap mt-auto">
+                <div className="flex items-center flex-wrap mt-1">
                   <a
                     className="text-orange-500 bg-orange-200 px-3 py-1 rounded-lg inline-flex items-center md:mb-2 lg:mb-0"
                     href={deal.link}
@@ -123,9 +122,6 @@ export default function Deals({
                       <path d="M12 5l7 7-7 7"></path>
                     </svg>
                   </a>
-                  <span className="text-green-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm border-gray-200">
-                    $ {deal.totalValue}
-                  </span>
                 </div>
               </div>
             </div>

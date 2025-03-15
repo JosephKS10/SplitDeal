@@ -121,17 +121,23 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
   };
 
   return (
-    <div className="relative flex flex-col items-center gap-2">
-      <div className="w-96 flex items-center gap-2">
-        <label htmlFor="location-search" className="sr-only">Search location</label>
-        <input
-          id="location-search"
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search location..."
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
+    <div className="relative flex flex-col items-center gap-2 w-full">
+      <div className="w-full flex justify-center gap-2">
+        <div className="w-100">
+          <label htmlFor="location-search" className="sr-only">Search location</label>
+          <input
+            id="location-search"
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search location..."
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+          <div>
+            {loading && <p className="text-gray-500 text-sm mt-1">Loading...</p>}
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          </div>
+        </div>
         <div>
           <a
             className="size-13 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
@@ -159,16 +165,13 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
             </svg>
           </a>
         </div>
-        <div>
-          {loading && <p className="text-gray-500 text-sm mt-1">Loading...</p>}
-          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-        </div>
+
       </div>
 
       {locations.length > 0 && (
         <ul
-          className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10"
-          style={{ top: "93%" }}
+          className="absolute w-100 sm-w-50 bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10 sm:left-10 left-[16%]"
+          style={{ top: "93%"}}
         >
           {locations.map((location) => (
             <li

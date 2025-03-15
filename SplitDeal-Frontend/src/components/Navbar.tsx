@@ -1,28 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-
-  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [authToken, setAuthToken] = useState<string | null>(localStorage.getItem('userToken'));
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    const token = localStorage.getItem('userToken');
-    setAuthToken(token);
+    // Initial token check
+    setAuthToken(localStorage.getItem('userToken'));
     setIsLoading(false);
-  }
-  , []);
+
+    // Interval to check for token updates
+    const interval = setInterval(() => {
+      const token = localStorage.getItem('userToken');
+      setAuthToken(token);
+    }, 1000); // Checks every 1 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []); 
 
   function logout() {
     localStorage.removeItem('userToken');
     setAuthToken(null);
   }
 
-  if(isLoading) {
-    return (
-      <div>Loading...</div>
-    );
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-
 
   return (
     <div>
@@ -34,49 +38,28 @@ const Navbar = () => {
             <NavLink to="/" className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80">
               <img src="https://res.cloudinary.com/dehtc9uyy/image/upload/v1741969203/SplitDealLogo_wtfs6f.png" width={150} height={150} alt="Logo" />
             </NavLink>
-            {/* End Logo */}
           </div>
 
           {/* Button Group */}
           <div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
-            {!authToken && <NavLink
-              to="/signup"
-              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
-            >
-              Sign Up
-            </NavLink>}
-
-            {authToken && <button
-              onClick={logout}
-              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
-            >
-              Logout
-            </button>}
-
-            {/* Mobile Hamburger Button */}
-            <div className="lg:hidden">
-              <button
-                type="button"
-                className="hs-collapse-toggle size-9.5 flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
-                id="hs-navbar-hcail-collapse"
-                aria-expanded="false"
-                aria-controls="hs-navbar-hcail"
-                aria-label="Toggle navigation"
-                data-hs-collapse="#hs-navbar-hcail"
+            {!authToken && (
+              <NavLink
+                to="/signup"
+                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
               >
-                <svg className="hs-collapse-open:hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="3" x2="21" y1="6" y2="6" />
-                  <line x1="3" x2="21" y1="12" y2="12" />
-                  <line x1="3" x2="21" y1="18" y2="18" />
-                </svg>
-                <svg className="hs-collapse-open:block hidden shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
+                Sign Up
+              </NavLink>
+            )}
+
+            {authToken && (
+              <button
+                onClick={logout}
+                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
+              >
+                Logout
               </button>
-            </div>
+            )}
           </div>
-          {/* End Button Group */}
 
           {/* Collapse (Navigation Menu) */}
           <div id="hs-navbar-hcail" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6" aria-labelledby="hs-navbar-hcail-collapse">
@@ -98,7 +81,6 @@ const Navbar = () => {
               </NavLink>
             </div>
           </div>
-          {/* End Collapse */}
         </nav>
       </header>
       {/* ========== END HEADER ========== */}

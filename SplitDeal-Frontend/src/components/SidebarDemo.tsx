@@ -13,6 +13,7 @@ import {
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import Deals from "./Deals";
+import ApiUrls from "../Api/ApiUrls";
 
 export const SidebarDemo = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export const SidebarDemo = () => {
   const fetchSubCategories = async (categoryId: string) => {
     try {
       const response = await fetch(
-        `https://seemed-commands-isolated-filed.trycloudflare.com/api/sub-category/get-sub-categories/${categoryId}`
+        `${ApiUrls.getSubCategory}/${categoryId}`
       );
       const data = await response.json();
       setSubCategories(data);
@@ -37,7 +38,7 @@ export const SidebarDemo = () => {
   };
 
   return (
-     <div className="flex pt-26 cursor-pointer">
+    <div className="flex pt-26 cursor-pointer">
       <Sidebar subCategories={subCategories} setSelectedCategory={setSelectedCategory} />
       <Deals selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
     </div>
@@ -98,9 +99,8 @@ const Option = ({
     <motion.button
       layout
       onClick={() => setSelected(title)}
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${
-        selected === title ? "bg-orange-100 text-orange-800" : "text-slate-500 hover:bg-slate-100"
-      }`}
+      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-orange-100 text-orange-800" : "text-slate-500 hover:bg-slate-100"
+        }`}
     >
       <motion.div layout className="grid h-full w-10 place-content-center text-lg">
         {iconUrl ? <img src={iconUrl} alt={title} className="w-6 h-6" /> : "🔹"}

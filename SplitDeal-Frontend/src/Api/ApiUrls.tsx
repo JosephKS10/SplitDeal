@@ -6,6 +6,9 @@ const ApiUrls = {
     register: `${baseUrl}auth/register`,
     locationSet:`${baseUrl}user/update-location`,
     getCategory:`${baseUrl}category/get-categories`,
+    getDeal:`${baseUrl}deal/get-deals-by-category`,
+    getSubCategory:`${baseUrl}sub-category/get-sub-categories`
+    
 
 
 
