@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 import ContactUs from "./Pages/ContactUs";
 import NotFound from "./Pages/NotFound";
 import AboutUs from "./Pages/AboutUs";
@@ -9,9 +11,17 @@ import LogIn from "./components/LogIn";
 import Upload from "./components/Upload";
 import { SidebarDemo } from "./components/SidebarDemo";
 import Chat from "./components/Chat";
+import "preline/preline";
+import { IStaticMethods } from "preline/preline";
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 
-const RouterPage = () => {
+
+const App = () => {
   return (
     <Router>
       <Navbar />
@@ -30,4 +40,4 @@ const RouterPage = () => {
   )
 }
 
-export default RouterPage;
+export default App;

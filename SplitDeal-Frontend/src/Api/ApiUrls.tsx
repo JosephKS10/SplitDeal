@@ -4,7 +4,8 @@ const ApiUrls = {
 
     login: `${baseUrl}auth/login`,
     register: `${baseUrl}auth/register`,
-    locationSet:`${baseUrl}user/update-location`
+    locationSet:`${baseUrl}user/update-location`,
+    getCategory:`${baseUrl}category/get-categories`,
 
 
 
