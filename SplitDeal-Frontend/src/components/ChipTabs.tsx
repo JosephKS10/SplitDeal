@@ -1,18 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
 
-const ChipTabs = () => {
-  return (
-        <div>
-            <ul className='flex justify-center items-center space-x-2'>
-                <Link to='/sidebar'>Sidebar</Link>
-                <Link to='/aboutus'>aboutUs</Link>
-                <a href='streets.in'>Home</a>
-                <a href='streets.in'>Home</a>
-            </ul>
-        </div>
-  )
+interface Category {
+  _id: string;
+  name: string;
 }
 
-export default ChipTabs
+interface ChipTabsProps {
+  categories: Category[];
+  selectedCategory: string | null;
+  setSelectedCategory: (categoryId: string) => void;
+}
 
+const ChipTabs: React.FC<ChipTabsProps> = ({ categories, selectedCategory, setSelectedCategory }) => {
+  return (
+    <div>
+      <ul className="flex justify-center items-center space-x-4 p-2">
+        {categories.map((category) => (
+          <button
+            key={category._id}
+            className={`px-4 py-2 rounded-lg transition-all ${
+              selectedCategory === category._id
+                ? "bg-blue-500 text-white font-bold"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+            onClick={() => setSelectedCategory(category._id)}
+          >
+            {category.name}
+          </button>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ChipTabs;
