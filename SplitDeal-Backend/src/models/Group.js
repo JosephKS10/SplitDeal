@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const GroupSchema = new mongoose.Schema({
+  dealId: {type: mongoose.Schema.Types.ObjectId, ref: 'Deal', required: true}, // Reference to the deal
   dealLogo: { type: String, required: true }, // Link to the deal logo/image
   dealTitle: { type: String, required: true },
   dealDescription: { type: String },

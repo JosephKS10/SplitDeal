@@ -4,6 +4,7 @@ const Group = require("../models/Group");
 exports.createGroup = async (req, res) => {
   try {
     const {
+      dealId,
       dealLogo,
       dealTitle,
       dealDescription,
@@ -18,6 +19,7 @@ exports.createGroup = async (req, res) => {
 
     // Create and save group
     const group = new Group({
+        dealId,
       dealLogo,
       dealTitle,
       dealDescription,
