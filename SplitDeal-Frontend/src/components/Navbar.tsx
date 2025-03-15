@@ -1,7 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  useEffect(() => {
+    const token = localStorage.getItem('userToken');
+    setAuthToken(token);
+    setIsLoading(false);
+  }
+  , []);
+
+  function logout() {
+    localStorage.removeItem('userToken');
+    setAuthToken(null);
+  }
+
+  if(isLoading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
+
   return (
     <div>
       {/* ========== HEADER ========== */}
@@ -17,12 +39,19 @@ const Navbar = () => {
 
           {/* Button Group */}
           <div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
-            <NavLink
+            {!authToken && <NavLink
               to="/signup"
               className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
             >
               Sign Up
-            </NavLink>
+            </NavLink>}
+
+            {authToken && <button
+              onClick={logout}
+              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Logout
+            </button>}
 
             {/* Mobile Hamburger Button */}
             <div className="lg:hidden">
