@@ -23,6 +23,7 @@ const LogIn = () => {
       console.log("Token expired, redirecting to login...");
       localStorage.removeItem("userToken");
       localStorage.removeItem("userId");
+      localStorage.removeItem("userName");
       localStorage.removeItem("tokenExpiration");
       navigate("/signup/login"); // Redirect user to login page
     }
@@ -54,6 +55,8 @@ const LogIn = () => {
 
         const token = res.data.token;
         const userId = res.data.user_id;
+        const userName = res.data.user_name;
+
         const expirationTime = Date.now() + 10 * 1000; // 1 minute from now
 
         // Debugging logs
@@ -63,6 +66,7 @@ const LogIn = () => {
 
         localStorage.setItem("userToken", JSON.stringify(token));
         localStorage.setItem("userId", JSON.stringify(userId));
+        localStorage.setItem("userName", JSON.stringify(userName));
         localStorage.setItem("tokenExpiration", expirationTime.toString());
 
         // Navigate after 2 seconds
