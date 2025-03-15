@@ -1,16 +1,12 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ContactUs from "./Pages/ContactUs";
 import NotFound from "./Pages/NotFound";
-import Home from "./Pages/Home";
 import AboutUs from "./Pages/AboutUs";
 import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
-import Authentication from "./components/Authentication";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import Upload from "./components/Upload";
-import { ExampleSidebar } from "./components/ExampleSideBar";
 import { SidebarDemo } from "./components/SidebarDemo";
 
 

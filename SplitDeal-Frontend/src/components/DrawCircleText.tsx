@@ -1,11 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { WordRotate } from "./magicui/word-rotate";
 
 export const DrawCircleText = () => {
   return (
     <div className="grid place-content-center font-bold text-black">
       <h1 className="max-w-1xl text-center text-2xl sm:text-5xl leading-snug">
-        <span className="text-orange-500">Find</span> & <span className="text-orange-500">Share</span> the {" "}
+        <div className="flex justify-center items-center">
+        <div className="w-32"> 
+    <WordRotate
+      className="text-2xl sm:text-5xl font-bold text-orange-500"
+      words={["Find", "Unite", "Share", "Enjoy"]}
+    />
+  </div>
+  {/* Fixed text "the" */}
+  <span className="text-2xl sm:text-5xl font-bold text-black ml-3">
+    the
+  </span>
+        </div>
         <span className="relative">
             Best Deals
           <svg
