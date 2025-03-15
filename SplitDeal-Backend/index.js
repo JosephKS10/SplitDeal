@@ -9,6 +9,10 @@ const authRoutes = require('./src/routes/authRoutes');
 const userRoutes = require("./src/routes/userRoutes");
 const categoryRoutes = require('./src/routes/categoryRoutes');
 const subCategoryRoutes = require('./src/routes/subCategoryRoutes');
+const dealRoutes = require('./src/routes/dealRoutes');
+const groupRoutes = require('./src/routes/groupRoutes');
+const groupMemberRoutes = require('./src/routes/groupMemberRoutes');
+const chatRoutes = require('./src/routes/chatRoutes');
 
 // Middleware
 app.use(cors());
@@ -30,8 +34,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/sub-category", subCategoryRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/deal", require("./src/routes/dealRoutes"));
-app.use("/api/group", require("./src/routes/groupRoutes"));
+app.use("/api/deal", dealRoutes);
+app.use("/api/group", groupRoutes);
+app.use("/api/group-member", groupMemberRoutes);
+app.use("/api/chat", chatRoutes);
+
 
 
 const PORT = process.env.PORT || 5000;

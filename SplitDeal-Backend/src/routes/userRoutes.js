@@ -11,7 +11,6 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 // Update Profile
-router.put("/update-profile", authMiddleware, updateProfile);
 
 // Update Location
 router.put("/update-location", authMiddleware, updateLocation);

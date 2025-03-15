@@ -1,22 +1,6 @@
 const User = require("../models/User");
 
-// 📌 UPDATE PROFILE DETAILS
-exports.updateProfile = async (req, res) => {
-  try {
-    const { name, phone_number, location } = req.body;
-    const userId = req.user.user_id;
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { name, phone_number, location },
-      { new: true }
-    );
-
-    res.json({ msg: "Profile updated successfully", user: updatedUser });
-  } catch (error) {
-    res.status(500).json({ msg: "Server Error", error });
-  }
-};
 
 // 📌 UPDATE LOCATION
 exports.updateLocation = async (req, res) => {

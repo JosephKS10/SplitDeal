@@ -6,9 +6,11 @@ const {
   getDealsByCategoryId,
   getDealsBySubCategoryId,
 } = require("../controllers/dealController");
+const authMiddleware = require("../middlewares/authMiddleware");
+
 
 // 📌 Route to create a new deal
-router.post("/create-deal", createDeal);
+router.post("/create-deal",authMiddleware, createDeal);
 
 // 📌 Route to get all deals
 router.get("/get-deals", getAllDeals);
