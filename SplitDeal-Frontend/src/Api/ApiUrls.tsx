@@ -1,4 +1,4 @@
-const baseUrl = "https://willow-bearing-march-mailing.trycloudflare.com/api/"
+const baseUrl = "https://seemed-commands-isolated-filed.trycloudflare.com/api/"
 
 const ApiUrls = {
 
