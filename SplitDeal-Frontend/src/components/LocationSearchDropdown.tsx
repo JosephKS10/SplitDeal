@@ -27,6 +27,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
   const [error, setError] = useState<string>("");
   const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [mapVisible, setMapVisible] = useState<boolean>(false); // State to control map visibility
+  const [locationError, setLocationError] = useState<string | null>(null); // Track location errors
 
   // Set selected location in the backend
   const setLocation = async (location: Location) => {
@@ -89,7 +90,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
   }, [query]);
 
   // Get user's current location
-  useEffect(() => {
+  const requestLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -97,15 +98,18 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
+          setLocationError(null); // Reset any previous error
         },
         (error) => {
           console.error("Error getting current location:", error);
+          setLocationError("Failed to get your location. Please enable location services.");
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
+      setLocationError("Geolocation is not supported by your browser.");
     }
-  }, []);
+  };
 
   // Handle location selection
   const handleSelectLocation = (location: Location) => {
@@ -117,7 +121,11 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
 
   // Handle location icon click to toggle map visibility
   const handleLocationIconClick = () => {
-    setMapVisible(!mapVisible);
+    if (currentLocation) {
+      setMapVisible(!mapVisible); // Toggle map visibility if location is available
+    } else {
+      requestLocation(); // Request location if not already available
+    }
   };
 
   return (
@@ -142,7 +150,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
           <a
             className="size-13 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
             href="#"
-            onClick={handleLocationIconClick} // Toggle map visibility on click
+            onClick={handleLocationIconClick} // Toggle map visibility or request location
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +173,6 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
             </svg>
           </a>
         </div>
-
       </div>
 
       {locations.length > 0 && (
@@ -185,7 +192,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
         </ul>
       )}
 
-      {/* Render the map only when the user clicks the location icon */}
+      {/* Render the map only when the user clicks the location icon and has location */}
       {mapVisible && currentLocation && (
         <div className="mt-4 w-full">
           <iframe
@@ -200,8 +207,12 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
           ></iframe>
         </div>
       )}
+
+      {/* Show location permission error if any */}
+      {locationError && <p className="text-red-500 text-sm mt-1">{locationError}</p>}
     </div>
   );
 };
 
 export default LocationSearchDropdown;
+  

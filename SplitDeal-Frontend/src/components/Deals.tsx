@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import ChipTabs from "./ChipTabs";
 import ApiUrls from "../Api/ApiUrls";
+import ModelCreateGroup from "./ModelCreateGroup";
 
-export default function Deals({
-  selectedCategory,
-  setSelectedCategory,
-}) {
+export default function Deals({ selectedCategory, setSelectedCategory }) {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [deals, setDeals] = useState([]);
-  const [hoveredDeal, setHoveredDeal] = useState(null); // Track hovered deal
+  const [hoveredDeal, setHoveredDeal] = useState(null);
+  const [selectedDeal, setSelectedDeal] = useState(null); // For modal
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          ApiUrls.getCategory
-        );
+        const response = await fetch(ApiUrls.getCategory);
         const data = await response.json();
         setCategories(data);
 
@@ -41,14 +38,16 @@ export default function Deals({
 
   const fetchDeals = async (categoryId) => {
     try {
-      const response = await fetch(
-        `${ApiUrls.getDeal}/${categoryId}`
-      );
+      const response = await fetch(`${ApiUrls.getDeal}/${categoryId}`);
       const data = await response.json();
       setDeals(data);
     } catch (error) {
       console.error("Error fetching deals:", error);
     }
+  };
+
+  const closeModal = () => {
+    setSelectedDeal(null);
   };
 
   if (isLoading) {
@@ -68,14 +67,16 @@ export default function Deals({
           {deals.map((deal) => (
             <div
               key={deal._id}
-              className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm flex flex-col"
-              onMouseEnter={() => setHoveredDeal(deal._id)} // Set hovered deal
-              onMouseLeave={() => setHoveredDeal(null)} // Reset hovered deal
+              className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm flex flex-col cursor-pointer"
+              onMouseEnter={() => setHoveredDeal(deal._id)}
+              onMouseLeave={() => setHoveredDeal(null)}
             >
-              {/* Show Expiry and Created Date on hover */}
-              <div className="relative border-b-2 flex justify-center item-center" style={{borderColor:"grey"}}>
+              <div
+                className="relative border-b-2 flex justify-center items-center"
+                style={{ borderColor: "grey" }}
+              >
                 <img
-                  className="lg:h-42 md:h-32 m-2  border-gray-200 object-center transition-transform duration-300 transform hover:scale-105"
+                  className="lg:h-42 md:h-32 m-2 border-gray-200 object-center transition-transform duration-300 transform hover:scale-105"
                   src={deal.storeLogo}
                   alt={deal.dealName}
                 />
@@ -91,7 +92,7 @@ export default function Deals({
                 <p className="leading-relaxed mb-3">{deal.storeLocation}</p>
 
                 <p className="leading-relaxed mb-3">
-                  Expiry Date:<span> </span>
+                  Expiry Date:{" "}
                   <span className="font-semibold">
                     {new Date(deal.expiryDate).toLocaleDateString("en-US", {
                       day: "numeric",
@@ -102,11 +103,9 @@ export default function Deals({
                 </p>
 
                 <div className="flex items-center flex-wrap mt-1">
-                  <a
+                  <button
                     className="text-orange-500 bg-orange-200 px-3 py-1 rounded-lg inline-flex items-center md:mb-2 lg:mb-0"
-                    href={deal.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => setSelectedDeal(deal)}
                   >
                     Offer
                     <svg
@@ -121,13 +120,15 @@ export default function Deals({
                       <path d="M5 12h14"></path>
                       <path d="M12 5l7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      <ModelCreateGroup selectedDeal={selectedDeal} closeModal={closeModal} />
     </div>
   );
 }

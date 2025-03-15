@@ -57,7 +57,7 @@ const LandingPage = () => {
             
           </div>
           <div className='flex items-center justify-center'>
-            <AnimatedBeamDemo/>
+            {/* <AnimatedBeamDemo/> */}
           </div>
           <div className="text-center pt-2 ">
             {/* <AnimatedGradientTextDemo/> */}

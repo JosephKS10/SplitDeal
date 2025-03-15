@@ -38,7 +38,7 @@ export const SidebarDemo = () => {
   };
 
   return (
-    <div className="flex pt-26 cursor-pointer">
+    <div className="flex pt-26">
       <Sidebar subCategories={subCategories} setSelectedCategory={setSelectedCategory} />
       <Deals selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
     </div>
