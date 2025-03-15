@@ -102,7 +102,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
 
   return (
     <div className="relative flex justify-center gap-2">
-      <div className="w-100">
+      <div className="w-full">
         <label htmlFor="location-search" className="sr-only">Search location</label>
         <input
           id="location-search"
@@ -119,7 +119,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
         </div>
       </div>
       {locations.length > 0 && (
-        <ul className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10">
+        <ul className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10" style={{top:"93%"}}>
           {locations.map((location) => (
             <li
               key={location.properties.id}
