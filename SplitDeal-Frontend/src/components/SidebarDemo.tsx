@@ -37,7 +37,7 @@ export const SidebarDemo = () => {
   };
 
   return (
-     <div className="flex bg-orange-50 cursor-pointer">
+     <div className="flex pt-26 cursor-pointer">
       <Sidebar subCategories={subCategories} setSelectedCategory={setSelectedCategory} />
       <Deals selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
     </div>
