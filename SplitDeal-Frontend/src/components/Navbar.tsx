@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div>
       {/* ========== HEADER ========== */}
-      <header className="flex  flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
+      <header className="absolute flex flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
         <nav className="relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
           <div className="lg:col-span-3 flex items-center">
             {/* Logo */}
@@ -58,8 +58,8 @@ const Navbar = () => {
               <NavLink to="/deals" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Deals
               </NavLink>
-              <NavLink to="/about" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
-                About
+              <NavLink to="/aboutus" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+                About Us
               </NavLink>
               <NavLink to="/contactus" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Contact Us

@@ -5,7 +5,7 @@ import { WordRotate } from "./magicui/word-rotate";
 export const DrawCircleText = () => {
   return (
     <div className="grid place-content-center font-bold text-black">
-      <h1 className="max-w-1xl text-center text-2xl sm:text-5xl leading-snug">
+      <h1 className="max-w-1xl sm:py-3 text-center text-3xl sm:text-5xl leading-snug">
         <div className="flex justify-center items-center">
         <div className="flex items-center justify-center sm:justify-start">
   {/* Container for WordRotate with dynamic width */}
@@ -47,6 +47,9 @@ export const DrawCircleText = () => {
         </span>{" "}
         In Your Area!
       </h1>
+      <p className="mt-8 text-md sm:text-lg font-medium text-pretty text-gray-500 ">
+                Connect with others to unlock the power of group buying—pool together!
+            </p>
     </div>
   );
 };

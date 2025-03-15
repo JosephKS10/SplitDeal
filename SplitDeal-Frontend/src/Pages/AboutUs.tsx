@@ -1,8 +1,11 @@
 import React from 'react'
+import Teams from '../components/Teams'
 
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
+    <div>
+        <Teams/>
+    </div>
   )
 }
 
