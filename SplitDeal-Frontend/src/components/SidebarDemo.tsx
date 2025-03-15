@@ -27,7 +27,7 @@ export const SidebarDemo = () => {
   const fetchSubCategories = async (categoryId: string) => {
     try {
       const response = await fetch(
-        `https://willow-bearing-march-mailing.trycloudflare.com/api/sub-category/get-sub-categories/${categoryId}`
+        `https://seemed-commands-isolated-filed.trycloudflare.com/api/sub-category/get-sub-categories/${categoryId}`
       );
       const data = await response.json();
       setSubCategories(data);
