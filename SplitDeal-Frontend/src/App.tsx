@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import Upload from "./components/Upload";
 import { SidebarDemo } from "./components/SidebarDemo";
+import Chat from "./components/Chat";
 
 
 const RouterPage = () => {
@@ -20,6 +21,7 @@ const RouterPage = () => {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/sidebar" element={<SidebarDemo />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/signup/login" element={<LogIn />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="*" element={<NotFound />} />

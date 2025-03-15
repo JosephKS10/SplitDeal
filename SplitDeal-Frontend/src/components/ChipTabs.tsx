@@ -7,7 +7,7 @@ const ChipTabs = () => {
   const [selected, setSelected] = useState(tabs[0]);
 
   return (
-    <div className="p-3 flex bg-neutral-200 border-b-2 border-neutral-300 justify-center items-center flex-wrap gap-5">
+    <div className="p-3 flex rounded-xl border-neutral-300  items-center flex-wrap gap-5">
       {tabs.map((tab) => (
         <Chip
           text={tab}
@@ -36,9 +36,9 @@ const Chip = ({
         selected
           ? "text-white"
           : "text-slate-300 hover:text-white hover:bg-orange-300"
-      } text-sm transition-colors px-2.5 py-0.5 rounded-md relative`}
+      } text-sm transition-colors rounded-md relative`}
     >
-      <span className="relative  text-neutral-600 text-xl cursor-pointer z-10">{text}</span>
+      <span className="relative px-3 py-1  rounded-lg text-neutral-600 text-xl cursor-pointer z-10">{text}</span>
       {selected && (
         <motion.span
           layoutId="pill-tab"

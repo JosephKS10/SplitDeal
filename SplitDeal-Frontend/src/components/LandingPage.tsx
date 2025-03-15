@@ -1,6 +1,7 @@
 import React from 'react'
 import { AnimatedGradientTextDemo } from './AnimatedGradientTextDemo'
 import { DrawCircleText } from './DrawCircleText'
+import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 
 const LandingPage = () => {
   return (
@@ -38,7 +39,8 @@ const LandingPage = () => {
                 Read more <span aria-hidden="true">&rarr;</span>
               </a>
             </div> */}
-            <AnimatedGradientTextDemo/>
+            {/* <AnimatedGradientTextDemo/> */}
+            <AnimatedBeamDemo/>
           </div>
           <div className="text-center">
             {/* <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
@@ -49,6 +51,7 @@ const LandingPage = () => {
             <p className="mt-8 text-md sm:text-lg font-medium text-pretty text-gray-500 ">
                 Connect with others to unlock the power of group buying—pool together!
             </p>
+            
 
             <form className='py-10'>
             {/* <div className="mx-auto max-w-dm sm:flex sm:space-x-3 p-3 bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-100">

@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div>
       {/* ========== HEADER ========== */}
-      <header className="flex z-50 flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
+      <header className="flex  flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
         <nav className="relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
           <div className="lg:col-span-3 flex items-center">
             {/* Logo */}
@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
             <NavLink
               to="/signup"
-              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-400 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
+              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-orange-500 text-white hover:bg-orange-500 focus:outline-hidden focus:bg-orange-500 transition disabled:opacity-50 disabled:pointer-events-none"
             >
               Sign Up
             </NavLink>

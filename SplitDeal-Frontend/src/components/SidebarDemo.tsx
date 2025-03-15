@@ -16,7 +16,7 @@ import Deals from "./Deals";
 
 export const SidebarDemo = () => {
   return (
-    <div className="flex bg-indigo-50">
+    <div className="flex bg-orange-50 cursor-pointer">
       <Sidebar />
       <Deals />
     </div>
@@ -114,7 +114,7 @@ const Option = ({
     <motion.button
       layout
       onClick={() => setSelected(title)}
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-indigo-100 text-indigo-800" : "text-slate-500 hover:bg-slate-100"}`}
+      className={`relative flex h-10 w-full items-center rounded-md transition-colors ${selected === title ? "bg-orange-100 cursor-pointer text-orange-800 cursor-pointer" : "text-slate-500 hover:bg-slate-100"}`}
     >
       <motion.div
         layout
@@ -143,7 +143,7 @@ const Option = ({
           }}
           style={{ y: "-50%" }}
           transition={{ delay: 0.5 }}
-          className="absolute right-2 top-1/2 size-4 rounded bg-indigo-500 text-xs text-white"
+          className="absolute right-2 top-1/2 size-4 rounded bg-orange-500 cursor-pointer text-xs text-white"
         >
           {notifs}
         </motion.span>
@@ -179,7 +179,7 @@ const Logo = () => {
   return (
     <motion.div
       layout
-      className="grid size-10 shrink-0 place-content-center rounded-md bg-indigo-600"
+      className="grid size-10 shrink-0 place-content-center rounded-md bg-orange-600 cursor-pointer"
     >
       <svg
         width="24"

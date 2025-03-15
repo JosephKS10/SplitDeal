@@ -7,16 +7,23 @@ export const DrawCircleText = () => {
     <div className="grid place-content-center font-bold text-black">
       <h1 className="max-w-1xl text-center text-2xl sm:text-5xl leading-snug">
         <div className="flex justify-center items-center">
-        <div className="w-32"> 
+        <div className="flex items-center justify-center sm:justify-start">
+  {/* Container for WordRotate with dynamic width */}
+  <div className="min-w-[6rem] sm:min-w-[8rem]">
     <WordRotate
-      className="text-2xl sm:text-5xl font-bold text-orange-500"
+      className="text-3xl sm:text-5xl font-bold text-orange-500"
       words={["Find", "Unite", "Share", "Enjoy"]}
     />
   </div>
+  
   {/* Fixed text "the" */}
-  <span className="text-2xl sm:text-5xl font-bold text-black ml-3">
+  <span className="text-3xl sm:text-5xl font-bold text-black ml-1 sm:ml-3">
     the
   </span>
+</div>
+
+  {/* Fixed text "the" */}
+  
         </div>
         <span className="relative">
             Best Deals
