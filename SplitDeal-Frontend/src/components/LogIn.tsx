@@ -78,11 +78,11 @@ const LogIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center pt-20">
       <div className="mt-7 max-w-max bg-white border border-gray-200 rounded-xl shadow-2xs">
         <div className="p-4 sm:p-7">
           <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
+            <h1 className="block text-2xl font-bold text-gray-800">Login</h1>
             <p className="mt-2 text-sm text-gray-600">
               Don't have an account yet?{" "}
               <NavLink to="/signup" className="text-blue-600 font-medium hover:underline">
