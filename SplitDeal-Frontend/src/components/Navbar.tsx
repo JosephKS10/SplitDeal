@@ -55,7 +55,7 @@ const Navbar = () => {
               <NavLink to="/" className="relative inline-block cursor-pointer text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-orange-400">
                 Home
               </NavLink>
-              <NavLink to="/deals" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/sidebar" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Deals
               </NavLink>
               <NavLink to="/aboutus" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">

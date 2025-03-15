@@ -5,6 +5,7 @@ import LocationSearchDropdown from './LocationSearchDropdown'
 import { Link } from 'react-router-dom';
 import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 import BentoGrid from './BentoGrid';
+import ShuffleHero from './ShuffleHero';
 
 interface Location {
   properties: {
@@ -137,6 +138,7 @@ const LandingPage = () => {
         </div>
 
         <BentoGrid/>
+        <ShuffleHero/>
 
       </div>
 

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ApiUrls from "../Api/ApiUrls";
+import { Alert } from "./ui/alert";
+import { AlertDescription } from "./ui/alert";
+import { AlertTitle } from "./ui/alert";
 
 const ORS_API_KEY = "5b3ce3597851110001cf62488d8c0611747a4fd18528e23d079d839b"; // Replace with your OpenRouteService API key
 
@@ -25,53 +28,76 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [currentLocation, setCurrentLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [mapVisible, setMapVisible] = useState<boolean>(false); // Control map display
 
-  // Function to set the selected location in the backend
+  // Alert states for showing the current address
+  const [alertMessage, setAlertMessage] = useState<string>("");
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
+  // Function to fetch reverse geocoded address using ORS API
+  const fetchAddress = async (lat: number, lng: number): Promise<string> => {
+    try {
+      const response = await axios.get("https://api.openrouteservice.org/geocode/reverse", {
+        params: {
+          api_key: ORS_API_KEY,
+          "point.lat": lat,
+          "point.lon": lng,
+          size: 1, // Only one result
+        },
+      });
+      if (response.data.features && response.data.features.length > 0) {
+        return response.data.features[0].properties.label;
+      } else {
+        return `Lat: ${lat}, Lng: ${lng}`;
+      }
+    } catch (err) {
+      console.error("Error fetching address:", err);
+      return `Lat: ${lat}, Lng: ${lng}`;
+    }
+  };
+
+  // Set selected location in the backend
   const setLocation = async (location: Location) => {
-    const yourToken = localStorage.getItem('userToken');
+    const yourToken = localStorage.getItem("userToken");
     const tokenWithoutQuotes = yourToken?.replace(/^"|"$/g, "");
-    console.log(tokenWithoutQuotes);
-    console.log(location.properties.label)
     if (yourToken) {
       try {
-        const response = await axios.put(
+        await axios.put(
           ApiUrls.locationSet,
           { location: location.properties.label },
           {
             headers: {
               Authorization: `Bearer ${tokenWithoutQuotes}`,
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
-        console.log('Location updated successfully:', response.data.msg);
       } catch (error) {
-        console.error('Error updating location:', error);
-        setError('Error updating the location. Please try again.');
+        console.error("Error updating location:", error);
+        setError("Error updating the location. Please try again.");
       }
     } else {
-      console.error('No authentication token found.');
+      console.error("No authentication token found.");
     }
   };
 
-  // Debounced search function
+  // Debounced search function to fetch locations by query
   const fetchLocations = async (searchText: string) => {
     if (!searchText) {
       setLocations([]);
       return;
     }
-
     setLoading(true);
     setError("");
-
     try {
-      const response = await axios.get(`https://api.openrouteservice.org/geocode/search`, {
+      const response = await axios.get("https://api.openrouteservice.org/geocode/search", {
         params: {
           api_key: ORS_API_KEY,
           text: searchText,
-          size: 5, // Limit results
-          "boundary.country": "AU", // Restrict to Australia
-          "boundary.city": "Melbourne", // Restrict to Melbourne
+          size: 5,
+          "boundary.country": "AU",
+          "boundary.city": "Melbourne",
         },
       });
       setLocations(response.data.features || []);
@@ -83,27 +109,63 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
     }
   };
 
-  // Handle user input change with debouncing
+  // Debounce query changes to avoid excessive API calls
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchLocations(query);
-    }, 500); // 500ms debounce
-
+    }, 500);
     return () => clearTimeout(timer);
   }, [query]);
 
-  // Handle selection of a location
+  // Request geolocation permission when user clicks the button
+  const requestLocationPermission = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          setCurrentLocation({ lat, lng });
+          setMapVisible(true);
+          // Get the address via reverse geocoding
+          const address = await fetchAddress(lat, lng);
+          setAlertMessage(address);
+          setShowAlert(true);
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+          setError("Permission denied or error retrieving location.");
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      setError("Geolocation is not supported by this browser.");
+    }
+  };
+
+  // Automatically hide the alert after 5 seconds
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showAlert]);
+
+  // Handle location selection from the search dropdown
   const handleSelectLocation = (location: Location) => {
-    setQuery(location.properties.label); // Show selected location in input
-    setLocations([]); // Hide dropdown
-    onSelect(location); // Pass location data to parent component
-    setLocation(location); // Set the selected location in the backend
+    setQuery(location.properties.label);
+    setLocations([]);
+    onSelect(location);
+    setLocation(location);
   };
 
   return (
-    <div className="relative flex justify-center gap-2">
-      <div className="w-full">
-        <label htmlFor="location-search" className="sr-only">Search location</label>
+    <div className="relative flex flex-col items-center gap-2">
+      <div className="w-96 flex items-center gap-2">
+        <label htmlFor="location-search" className="sr-only">
+          Search location
+        </label>
         <input
           id="location-search"
           type="text"
@@ -112,14 +174,41 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
           placeholder="Search location..."
           className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
-        <div>
-
-          {loading && <p className="text-gray-500 text-sm mt-1">Loading...</p>}
-          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-        </div>
+        {/* Permission Button beside input */}
+        <button
+          onClick={requestLocationPermission}
+          className="p-3 cursor-pointer inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-500 hover:bg-orange-600 text-white focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+          </svg>
+        </button>
       </div>
+
+      {/* Alert displaying the current location's address */}
+      {showAlert && currentLocation && (
+        <Alert>
+          <AlertTitle>Current Location</AlertTitle>
+          <AlertDescription>{alertMessage}</AlertDescription>
+        </Alert>
+      )}
+
+      {loading && <p className="text-gray-500 text-sm mt-1">Loading...</p>}
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+
       {locations.length > 0 && (
-        <ul className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10" style={{top:"93%"}}>
+        <ul
+          className="absolute w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-1 z-10"
+          style={{ top: "93%" }}
+        >
           {locations.map((location) => (
             <li
               key={location.properties.id}
@@ -131,12 +220,22 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
           ))}
         </ul>
       )}
-      <a className="size-13  px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-        </svg>
-      </a>
+
+      {/* Only display map when permission is granted */}
+      {mapVisible && currentLocation && (
+        <div className="mt-4 w-full">
+          <iframe
+            src={`https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}&z=15&output=embed`}
+            style={{
+              width: "100%",
+              height: "320px",
+              border: "none",
+            }}
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 };
