@@ -7,9 +7,11 @@ import AboutUs from "./Pages/AboutUs";
 import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
 import Authentication from "./components/Authentication";
-import Deals from "./components/Deals";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
+import Upload from "./components/Upload";
+import { ExampleSidebar } from "./components/ExampleSideBar";
+import { SidebarDemo } from "./components/SidebarDemo";
 
 
 const RouterPage = () => {
@@ -21,8 +23,9 @@ const RouterPage = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/sidebar" element={<SidebarDemo />} />
         <Route path="/signup/login" element={<LogIn />} />
-        <Route path="/deals" element={<Deals />} />
+        <Route path="/upload" element={<Upload />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
