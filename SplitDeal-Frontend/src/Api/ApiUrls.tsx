@@ -1,4 +1,4 @@
-const baseUrl = "https://seemed-commands-isolated-filed.trycloudflare.com/api/"
+const baseUrl = "https://kerry-lan-une-checked.trycloudflare.com/api/"
 
 const ApiUrls = {
 

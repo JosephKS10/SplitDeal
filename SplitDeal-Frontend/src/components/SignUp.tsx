@@ -57,7 +57,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center pt-20">
       <div className="mt-7 max-w-3xl bg-white border border-gray-200 rounded-xl shadow-2xs">
         <div className="p-4 sm:p-7">
           <div className="text-center">

@@ -14,7 +14,7 @@ export default function Deals({
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "https://seemed-commands-isolated-filed.trycloudflare.com/api/category/get-categories"
+          "https://kerry-lan-une-checked.trycloudflare.com/api/category/get-categories"
         );
         const data = await response.json();
         setCategories(data);
@@ -41,7 +41,7 @@ export default function Deals({
   const fetchDeals = async (categoryId) => {
     try {
       const response = await fetch(
-        `https://seemed-commands-isolated-filed.trycloudflare.com/api/deal/get-deals-by-category/${categoryId}`
+        `https://kerry-lan-une-checked.trycloudflare.com/api/deal/get-deals-by-category/${categoryId}`
       );
       const data = await response.json();
       setDeals(data);
