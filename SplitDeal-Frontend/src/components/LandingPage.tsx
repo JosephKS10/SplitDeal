@@ -3,6 +3,7 @@ import { AnimatedGradientTextDemo } from './AnimatedGradientTextDemo'
 import { DrawCircleText } from './DrawCircleText'
 import LocationSearchDropdown from './LocationSearchDropdown'
 import { Link } from 'react-router-dom';
+import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 
 interface Location {
   properties: {
@@ -13,7 +14,6 @@ interface Location {
     coordinates: [number, number];
   };
 }
-import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 
 const LandingPage = () => {
 
