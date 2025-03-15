@@ -1,4 +1,4 @@
-const baseUrl = "https://kerry-lan-une-checked.trycloudflare.com/api/"
+const baseUrl = "https://splitdeal.onrender.com/api/"
 
 const ApiUrls = {
 
