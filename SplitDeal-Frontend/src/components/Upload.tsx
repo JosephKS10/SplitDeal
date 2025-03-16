@@ -5,50 +5,13 @@ import axios from 'axios';
 const Upload = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [subCategories, setSubCategories] = useState([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [image, setImage] = useState<string | null>(null);
   const yourToken = localStorage.getItem("userToken");
   const tokenWithoutQuotes = yourToken?.replace(/^"|"$/g, "");
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Validate file size (Max 2MB)
-    if (file.size > 2 * 1024 * 1024) {
-      alert("File size exceeds 2MB. Please upload a smaller file.");
-      return;
-    }
-
-    const imageUrl = await uploadToCloudinary(file);
-    console.log(imageUrl)
-    if (imageUrl) {
-      setFormData({
-        ...formData,
-        storeLogo: imageUrl,
-      });
-
-    }
-  };
-
-  const uploadToCloudinary = async (file: File): Promise<string | null> => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "UploadProductImage"); // ✅ Ensure this preset exists in Cloudinary
-
-    try {
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/du5br7g8b/image/upload",
-        formData
-      );
-      console.log("Cloudinary Upload Response:", response.data);
-      return response.data.url;
-    } catch (error: any) {
-      console.error("Cloudinary upload error:", error.response?.data || error.message);
-      alert(`Upload failed: ${error.response?.data?.error?.message || error.message}`);
-      return null;
-    }
-  };
   // State for form inputs
   const [formData, setFormData] = useState({
     dealName: "",
@@ -62,6 +25,7 @@ const Upload = () => {
     subCategoryId: "", // Add subCategoryId if needed
   });
 
+  // Fetch categories on component mount
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -84,8 +48,31 @@ const Upload = () => {
     fetchCategories();
   }, []);
 
+  // Fetch sub-categories when selectedCategory changes
+  useEffect(() => {
+    if (selectedCategory) {
+      const fetchSubCategories = async () => {
+        try {
+          const response = await fetch(
+            `https://splitdeal.onrender.com/api/sub-category/get-sub-categories/${selectedCategory}`
+          );
+          const data = await response.json();
+          setSubCategories(data);
+
+          if (data.length > 0 && !selectedSubCategory) {
+            setSelectedSubCategory(data[0]._id);
+          }
+        } catch (error) {
+          console.error("Error fetching sub-categories:", error);
+        }
+      };
+
+      fetchSubCategories();
+    }
+  }, [selectedCategory]);
+
   // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -93,53 +80,99 @@ const Upload = () => {
     });
   };
 
-  // Handle file input change
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setFormData({
-  //       ...formData,
-  //       storeLogo: file,
-  //     });
-  //   }
-  // };
+  // Handle file upload to Cloudinary
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (Max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File size exceeds 2MB. Please upload a smaller file.");
+      return;
+    }
+
+    const imageUrl = await uploadToCloudinary(file);
+    if (imageUrl) {
+      setFormData({
+        ...formData,
+        storeLogo: imageUrl,
+      });
+      setImage(imageUrl); // Set image for preview
+    }
+  };
+
+  // Upload file to Cloudinary
+  const uploadToCloudinary = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "UploadProductImage"); // Ensure this preset exists in Cloudinary
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/du5br7g8b/image/upload",
+        formData
+      );
+      console.log("Cloudinary Upload Response:", response.data);
+      return response.data.secure_url; // Use secure_url for HTTPS
+    } catch (error: any) {
+      console.error("Cloudinary upload error:", error.response?.data || error.message);
+      alert(`Upload failed: ${error.response?.data?.error?.message || error.message}`);
+      return null;
+    }
+  };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const dealData = {
       dealName: formData.dealName,
       dealDesc: formData.dealDesc,
       categoryId: selectedCategory,
-      subCategoryId: "custom", // Add subCategoryId if needed
+      subCategoryId: selectedSubCategory, // Use selectedSubCategory
       storeName: formData.storeName,
       storeLocation: formData.storeLocation,
       totalValue: Number(formData.totalValue),
       discount: Number(formData.discount),
-      storeLogo: formData.storeLogo, // You may need to upload this separately and get a URL
+      storeLogo: formData.storeLogo, // URL from Cloudinary
       expiryDate: new Date(formData.expiryDate).toISOString(),
     };
-    console.log(dealData)
-    try {
-      const response = await axios.post("https://splitdeal.onrender.com/api/deal/create-deal",dealData, {
-        headers: {
-          Authorization: `Bearer ${tokenWithoutQuotes}`,
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Deal created successfully:", data);
+    try {
+      const response = await axios.post(
+        "https://splitdeal.onrender.com/api/deal/create-deal",
+        dealData,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenWithoutQuotes}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("Deal created successfully:", response.data);
         alert("Deal created successfully!");
+        // Reset form after successful submission
+        setFormData({
+          dealName: "",
+          dealDesc: "",
+          storeName: "",
+          storeLocation: "",
+          totalValue: "",
+          discount: "",
+          storeLogo: "",
+          expiryDate: "",
+          subCategoryId: "",
+        });
+        setImage(null); // Clear image preview
       } else {
         console.error("Failed to create deal:", response.statusText);
         alert("Failed to create deal. Please try again.");
       }
-    } catch (error) {
-      console.error("Error creating deal:", error);
-      alert("An error occurred. Please try again.");
+    } catch (error: any) {
+      console.error("Error creating deal:", error.response?.data || error.message);
+      alert(`An error occurred: ${error.response?.data?.msg || error.message}`);
     }
   };
 
@@ -227,6 +260,29 @@ const Upload = () => {
                     {categories.map((category) => (
                       <option key={category._id} value={category._id}>
                         {category.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Deal Sub-Category */}
+                <div className="space-y-2">
+                  <label htmlFor="subCategory" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+                    Deal Sub-Category
+                  </label>
+                  <select
+                    id="subCategory"
+                    name="subCategory"
+                    className="py-1.5 border-2 sm:py-2 px-3 pe-9 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-orange-500 focus:ring-orange-500 disabled:opacity-50 disabled:pointer-events-none"
+                    value={selectedSubCategory}
+                    onChange={(e) => setSelectedSubCategory(e.target.value)}
+                    disabled={!selectedCategory || isLoading}
+                    required
+                  >
+                    <option value="" disabled>{isLoading ? "Loading sub-categories..." : "Select a sub-category"}</option>
+                    {subCategories.map((subCategory) => (
+                      <option key={subCategory._id} value={subCategory._id}>
+                        {subCategory.name}
                       </option>
                     ))}
                   </select>
@@ -329,7 +385,7 @@ const Upload = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="discount" className="inline-block text-sm font-medium text-gray-800 mt-2.5 mb-1">
+                      <label htmlFor="totalValue" className="inline-block text-sm font-medium text-gray-800 mt-2.5 mb-1">
                         Total Value
                       </label>
                       <input
@@ -337,7 +393,7 @@ const Upload = () => {
                         name="totalValue"
                         id="totalValue"
                         className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="25"
+                        placeholder="100"
                         value={formData.totalValue}
                         onChange={handleInputChange}
                         required

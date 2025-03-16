@@ -23,6 +23,8 @@ const Navbar = () => {
 
   function logout() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('tokenExpiration');
     setAuthToken(null);
   }
 
@@ -78,7 +80,10 @@ const Navbar = () => {
               {/* <NavLink to="/contactus" className="inline-block hvr-underline-from-center text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Contact Us
               </NavLink> */}
-              {authToken && (<NavLink  to="/groups" className="inline-block hvr-underline-from-center text-lg  cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/groups" className="inline-block hvr-underline-from-center text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+                Explore Groups
+              </NavLink>
+              {authToken && (<NavLink  to="/chat" className="inline-block hvr-underline-from-center text-lg  cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 My Groups
               </NavLink>)}
             </div>
