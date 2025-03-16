@@ -216,7 +216,7 @@ const Upload = () => {
                         type="text"
                         name="storeName"
                         id="storeName"
-                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        className="py-2.5 sm:py-3 px-4 block w-full  rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 "
                         placeholder="Nike Unite South Wharf"
                         value={formData.storeName}
                         onChange={handleInputChange}
@@ -232,7 +232,7 @@ const Upload = () => {
                         type="text"
                         name="storeLocation"
                         id="storeLocation"
-                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 "
                         placeholder="20 Convention Centre Pl, South Wharf VIC 3006"
                         value={formData.storeLocation}
                         onChange={handleInputChange}
@@ -362,7 +362,7 @@ const Upload = () => {
                         type="date"
                         name="expiryDate"
                         id="expiryDate"
-                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 "
                         value={formData.expiryDate}
                         onChange={handleInputChange}
                         required
@@ -377,7 +377,7 @@ const Upload = () => {
                         type="number"
                         name="discount"
                         id="discount"
-                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 "
                         placeholder="25"
                         value={formData.discount}
                         onChange={handleInputChange}
@@ -392,8 +392,8 @@ const Upload = () => {
                         type="number"
                         name="totalValue"
                         id="totalValue"
-                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                        placeholder="100"
+                        className="py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none border-2 border-neutral-200 "
+                        placeholder="25"
                         value={formData.totalValue}
                         onChange={handleInputChange}
                         required
@@ -405,10 +405,10 @@ const Upload = () => {
               {/* End Grid */}
 
               {/* Submit Button */}
-              <div className="mt-5 flex justify-center gap-x-2">
+              <div className="mt-5 flex justify-center cursor-pointer gap-x-2">
                 <button
                   type="submit"
-                  className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
+                  className="py-3 px-4 inline-flex cursor-pointer items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
                 >
                   Submit your Deal
                 </button>

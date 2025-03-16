@@ -4,6 +4,12 @@ import ApiUrls from "../Api/ApiUrls";
 import ModelCreateGroup from "./ModelCreateGroup";
 import axios from "axios";
 import Loading from "./Loading";
+import { motion } from 'framer-motion';
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function Deals({ selectedCategory, setSelectedCategory }) {
   const [categories, setCategories] = useState([]);
@@ -74,70 +80,67 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
         />
 
 
+<div className="bg-gradient-to-b from-gray-100 to-gray-200 py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center mb-10">
+          🔥 Exclusive Deals Just for You
+        </h2>
 
-        <div className="grid gap-6 pt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {deals.map((deal) => (
-            <div
+            <motion.div
               key={deal._id}
-              className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm flex flex-col "
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="relative bg-white backdrop-blur-md p-6 rounded-xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl"
               onMouseEnter={() => setHoveredDeal(deal._id)}
               onMouseLeave={() => setHoveredDeal(null)}
             >
-              <div
-                className="relative border-b-2 flex justify-center items-center"
-                style={{ borderColor: "grey" }}
-              >
-                <img
-                  className="lg:h-42 md:h-32 m-2 border-gray-200 object-center transition-transform duration-300 transform hover:scale-105"
+              <motion.div className="relative overflow-hidden rounded-md">
+                <motion.img
                   src={deal.storeLogo}
                   alt={deal.dealName}
+                  className="w-full p-8 h-44 object-cover transition-transform duration-300"
+                  whileHover={{ scale: 1.05 }}
                 />
-              </div>
+              </motion.div>
 
-              <div className="p-5 flex flex-col flex-grow">
-                <h2 className="tracking-widest border-gray-200 text-xs title-font font-medium text-gray-400 mb-1">
+              <div className="mt-5">
+                <h3 className="text-gray-700 text-sm font-medium uppercase tracking-wide">
                   {deal.storeName}
-                </h2>
-                <h1 className="title-font pt-4 text-lg font-bold text-neutral-900 mb-3">
+                </h3>
+                <h2 className="text-lg font-semibold text-gray-900 mt-1">
                   {deal.dealName}
-                </h1>
-                <p className="leading-relaxed mb-3">{deal.storeLocation}</p>
-
-                <p className="leading-relaxed mb-3">
-                  Expiry Date:{" "}
-                  <span className="font-semibold">
-                    {new Date(deal.expiryDate).toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
+                </h2>
+                <p className="text-sm text-gray-600 mt-2">{deal.storeLocation}</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Expiry Date:{' '}
+                  <span className="font-semibold text-red-500">
+                    {new Date(deal.expiryDate).toLocaleDateString('en-US', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
                     })}
                   </span>
                 </p>
 
-                <div className="flex items-center flex-wrap mt-1">
-                  <button
-                    className="cursor-pointer text-orange-500 bg-orange-200 px-3 py-1 rounded-lg inline-flex items-center md:mb-2 lg:mb-0"
-                    onClick={() => setSelectedDeal(deal)}
-                  >
-                    Offer
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12h14"></path>
-                      <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                  </button>
-                </div>
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  className="mt-4 w-full cursor-pointer bg-neutral-900 text-white py-2 rounded-md font-medium shadow-md transition hover:bg-orange-600"
+                  onClick={() => setSelectedDeal(deal)}
+                >
+                  Create Deal 🚀
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
+      </div>
+    </div>
+
 
 {/* <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
