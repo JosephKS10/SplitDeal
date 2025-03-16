@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import Deals from "./Deals";
 import ApiUrls from "../Api/ApiUrls";
 
-export const SidebarDemo = () => {
+export const ChatGroups = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [subCategories, setSubCategories] = useState<{ _id: string; name: string; logoLink?: string }[]>([]);
 
@@ -98,10 +98,11 @@ const Option = ({
   return (
     <motion.button
       layout
-      className={`relative flex h-10 w-full items-center rounded-md transition-colors hover:bg-slate-100 cursor-pointer"
+      onClick={() => setSelected(title)}
+      className={`relative flex h-10 w-full items-center rounded-md transition-color"
         }`}
     >
-      <motion.div layout className="grid h-full cursor-pointer w-10 place-content-center text-lg">
+      <motion.div layout className="grid h-full w-10 place-content-center text-lg">
         {iconUrl ? <img src={iconUrl} alt={title} className="w-6 h-6" /> : "🔹"}
       </motion.div>
       {open && (
@@ -110,7 +111,7 @@ const Option = ({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.125 }}
-          className="text-xs cursor-pointer font-medium"
+          className="text-xs font-medium"
         >
           {title}
         </motion.span>
@@ -130,10 +131,10 @@ const ToggleClose = ({
     <motion.button
       layout
       onClick={() => setOpen((pv) => !pv)}
-      className="absolute bottom-0 left-0 cursor-pointer right-0 border-t border-slate-300 transition-colors hover:bg-slate-100"
+      className="absolute bottom-0 left-0 right-0 border-t border-slate-300 transition-colors hover:bg-slate-100"
     >
       <div className="flex items-center p-2">
-        <motion.div layout className="grid size-10 cursor-pointer place-content-center text-lg">
+        <motion.div layout className="grid size-10 place-content-center text-lg">
           <FiChevronsRight className={`transition-transform ${open && "rotate-180"}`} />
         </motion.div>
         {open && (
@@ -142,7 +143,7 @@ const ToggleClose = ({
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.125 }}
-            className="text-xs cursor-pointer font-medium"
+            className="text-xs font-medium"
           >
             Hide
           </motion.span>

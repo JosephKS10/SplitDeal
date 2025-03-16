@@ -15,6 +15,7 @@ import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import Footer from "./components/Footer";
 import LoginIn from "./components/LoginIn";
+import Groups from "./components/Groups";
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -29,17 +30,17 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/contactus" element={<ContactUs />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/sidebar" element={<SidebarDemo />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/groups" element={<Groups />} />
         <Route path="/loginin" element={<LoginIn />} />
         <Route path="/signup/login" element={<LogIn />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </Router>
   )
 }

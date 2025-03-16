@@ -75,10 +75,10 @@ const Navbar = () => {
               <NavLink to="/aboutus" className="inline-block hvr-underline-from-center text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 About Us
               </NavLink>
-              <NavLink to="/contactus" className="inline-block hvr-underline-from-center text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              {/* <NavLink to="/contactus" className="inline-block hvr-underline-from-center text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Contact Us
-              </NavLink>
-              {authToken && (<NavLink  to="/blog" className="inline-block hvr-underline-from-center text-lg  cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              </NavLink> */}
+              {authToken && (<NavLink  to="/groups" className="inline-block hvr-underline-from-center text-lg  cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 My Groups
               </NavLink>)}
             </div>
