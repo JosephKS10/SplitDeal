@@ -1,12 +1,43 @@
 import React from 'react'
+import { SidebarDemo } from './SidebarDemo'
+import IconSideNav from './IconSideNav'
+import { Example } from './RetractingSideBar'
 
 const Chat = () => {
+  const items = [
+    { name: "Nike Air ", count: 5 },
+    { name: "X-Fitness", count: 8 },
+    { name: "Sony deals", count: 5 }
+  ];
 
   return (
     <>
         {/* Content */}
-<div className="relative h-screen">
-  <div className="py-10 lg:py-14">
+<div className="relative ">
+<div className="fixed  top-52 z-50 rounded-r-2xl w-48 shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] bg-neutral-900  text-white p-4">
+    <h2 className="text-xl font-semibold mb-4">Chats</h2>
+    
+    {/* Single Chat */}
+    <div className="mb-4">
+  {items.map((item, index) => (
+    <div key={index} className="py-3">
+      <button
+        type="button"
+        className="py-3 cursor-pointer px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
+      >
+        {item.name}
+        <span className="inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-500 text-white">
+          {item.count}
+        </span>
+      </button>
+    </div>
+  ))}
+</div>
+
+    {/* Group Chats */}
+   
+  </div>
+  <div className="py-10 lg:py-24">
     {/* Title */}
     <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
       <a className="inline-block mb-4 flex-none focus:outline-hidden focus:opacity-80" href="../examples/html/ai-with-sidebar.html" aria-label="SplitDeal">
@@ -25,12 +56,7 @@ const Chat = () => {
     <ul className="mt-16 space-y-5">
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="space-y-3">
           <h2 className="font-medium text-gray-800">
@@ -78,12 +104,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -97,12 +118,12 @@ const Chat = () => {
               </p>
               <ul>
                 <li>
-                  <a className="text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../docs/index.html">
+                  <a className="text-sm text-orange-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../docs/index.html">
                     Installation Guide
                   </a>
                 </li>
                 <li>
-                  <a className="text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../docs/frameworks.html">
+                  <a className="text-sm text-orange-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="../docs/frameworks.html">
                     Framework Guides
                   </a>
                 </li>
@@ -116,10 +137,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -188,12 +209,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -445,10 +461,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -481,12 +497,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -521,10 +532,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -557,12 +568,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -574,13 +580,13 @@ const Chat = () => {
           {/* End Card */}
 
           <div>
-            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-blue-600 bg-white text-blue-600 align-middle hover:bg-blue-50 focus:outline-hidden focus:bg-blue-50 text-sm">
+            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-orange-600 bg-white text-orange-600 align-middle hover:bg-orange-50 focus:outline-hidden focus:bg-orange-50 text-sm">
               Is Tailwind CSS a free library?
             </button>
-            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-blue-600 bg-white text-blue-600 align-middle hover:bg-blue-50 focus:outline-hidden focus:bg-blue-50 text-sm">
+            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-orange-600 bg-white text-orange-600 align-middle hover:bg-orange-50 focus:outline-hidden focus:bg-orange-50 text-sm">
               What's the latest Tailwind CSS version?
             </button>
-            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-blue-600 bg-white text-blue-600 align-middle hover:bg-blue-50 focus:outline-hidden focus:bg-blue-50 text-sm">
+            <button type="button" className="mb-2.5 me-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-orange-600 bg-white text-orange-600 align-middle hover:bg-orange-50 focus:outline-hidden focus:bg-orange-50 text-sm">
               Is it a utility-class based?
             </button>
           </div>
@@ -590,10 +596,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -626,12 +632,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -662,10 +663,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -712,12 +713,7 @@ const Chat = () => {
 
       {/* Chat Bubble */}
       <li className="max-w-4xl py-2 px-4 sm:px-6 lg:px-8 mx-auto flex gap-x-2 sm:gap-x-4">
-        <svg className="shrink-0 size-9.5 rounded-full" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="38" height="38" rx="6" fill="#2563EB"/>
-          <path d="M10 28V18.64C10 13.8683 14.0294 10 19 10C23.9706 10 28 13.8683 28 18.64C28 23.4117 23.9706 27.28 19 27.28H18.25" stroke="white" strokeWidth="1.5"/>
-          <path d="M13 28V18.7552C13 15.5104 15.6863 12.88 19 12.88C22.3137 12.88 25 15.5104 25 18.7552C25 22 22.3137 24.6304 19 24.6304H18.25" stroke="white" strokeWidth="1.5"/>
-          <ellipse cx="19" cy="18.6554" rx="3.75" ry="3.6" fill="white"/>
-        </svg>
+        <img className="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" />
 
         <div className="grow max-w-[90%] md:max-w-2xl w-full space-y-3">
           {/* Card */}
@@ -728,12 +724,12 @@ const Chat = () => {
             <div className="space-y-1.5">
               <ul>
                 <li>
-                  <a className="text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                  <a className="text-sm text-orange-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
                     Get started with Tailwind CSS
                   </a>
                 </li>
                 <li>
-                  <a className="text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
+                  <a className="text-sm text-orange-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="#">
                     Tailwind CSS Installation guide
                   </a>
                 </li>
@@ -747,10 +743,10 @@ const Chat = () => {
             <div className="sm:flex sm:justify-between">
               <div>
                 <div className="inline-flex border border-gray-200 rounded-full p-0.5">
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
                   </button>
-                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-hidden focus:bg-blue-100 focus:text-blue-800">
+                  <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-full text-gray-500 hover:bg-orange-100 hover:text-orange-800 focus:z-10 focus:outline-hidden focus:bg-orange-100 focus:text-orange-800">
                     <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                   </button>
                 </div>
@@ -783,10 +779,10 @@ const Chat = () => {
           <div className="max-w-2xl flex gap-x-2 sm:gap-x-4">
             <div>
               <div className="text-end">
-                <button type="button" className="ms-1.5 mb-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-blue-600 bg-white text-blue-600 align-middle hover:bg-blue-50 focus:outline-hidden focus:bg-blue-50 text-sm">
+                <button type="button" className="ms-1.5 mb-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-orange-600 bg-white text-orange-600 align-middle hover:bg-orange-50 focus:outline-hidden focus:bg-orange-50 text-sm">
                   What is the use of Tailwind CSS?
                 </button>
-                <button type="button" className="ms-1.5 mb-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-blue-600 bg-white text-blue-600 align-middle hover:bg-blue-50 focus:outline-hidden focus:bg-blue-50 text-sm">
+                <button type="button" className="ms-1.5 mb-1.5 py-2 px-3 inline-flex justify-center items-center gap-x-2 rounded-lg border border-orange-600 bg-white text-orange-600 align-middle hover:bg-orange-50 focus:outline-hidden focus:bg-orange-50 text-sm">
                   What is the difference between Tailwind CSS and CSS?
                 </button>
               </div>
@@ -806,7 +802,7 @@ const Chat = () => {
     {/* Textarea */}
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
       <div className="flex justify-between items-center mb-3">
-        <button type="button" className="inline-flex justify-center items-center gap-x-2 rounded-lg font-medium text-gray-800 hover:text-blue-600 focus:outline-hidden focus:text-blue-600 text-xs sm:text-sm">
+        <button type="button" className="inline-flex justify-center items-center gap-x-2 rounded-lg font-medium text-gray-800 hover:text-orange-600 focus:outline-hidden focus:text-orange-600 text-xs sm:text-sm">
           <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
           New chat
         </button>
@@ -821,7 +817,7 @@ const Chat = () => {
 
       {/* Input */}
       <div className="relative">
-        <textarea className="p-3 sm:p-4 border-2 border-slate-400 pb-12 sm:pb-12 block w-full  rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Ask me anything..."></textarea>
+        <textarea className="p-3 sm:p-4 border-2 border-slate-400 pb-12 sm:pb-12 block w-full  rounded-lg sm:text-sm focus:border-orange-500 focus:ring-orange-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Ask me anything..."></textarea>
 
         {/* Toolbar */}
         <div className="absolute bottom-px inset-x-px p-2 rounded-b-lg bg-white">
@@ -851,7 +847,7 @@ const Chat = () => {
               {/* End Mic Button */}
 
               {/* Send Button */}
-              <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-blue-600 hover:bg-blue-500 focus:z-10 focus:outline-hidden focus:bg-blue-500">
+              <button type="button" className="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-orange-600 hover:bg-orange-500 focus:z-10 focus:outline-hidden focus:bg-orange-500">
                 <svg className="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                   <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
                 </svg>

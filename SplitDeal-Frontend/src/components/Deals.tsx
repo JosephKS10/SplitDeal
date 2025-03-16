@@ -3,6 +3,7 @@ import ChipTabs from "./ChipTabs";
 import ApiUrls from "../Api/ApiUrls";
 import ModelCreateGroup from "./ModelCreateGroup";
 import axios from "axios";
+import Loading from "./Loading";
 
 export default function Deals({ selectedCategory, setSelectedCategory }) {
   const [categories, setCategories] = useState([]);
@@ -56,7 +57,11 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+        <>
+          <Loading />
+        </>
+      );
   }
 
   return (
