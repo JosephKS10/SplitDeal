@@ -101,3 +101,42 @@ exports.updateRatingsProvided = async (req, res) => {
     res.status(500).json({ msg: "Server Error", error });
   }
 };
+
+exports.getGroupMembersByGroupId = async (req, res) => {
+  try {
+    const { groupId } = req.params;
+
+    // Find all group members with the given groupId
+    const groupMembers = await GroupMember.find({ groupId })
+      .populate("userId", "name email") // Populate user details (optional)
+      .populate("dealId", "dealName dealDesc"); // Populate deal details (optional)
+
+    if (!groupMembers || groupMembers.length === 0) {
+      return res.status(404).json({ msg: "No group members found for this group" });
+    }
+
+    res.json({ msg: "Group members fetched successfully", groupMembers });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
+
+exports.getGroupIdsByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find all group members with the given userId
+    const groupMembers = await GroupMember.find({ userId }).select("groupId");
+
+    if (!groupMembers || groupMembers.length === 0) {
+      return res.status(404).json({ msg: "No groups found for this user" });
+    }
+
+    // Extract unique group IDs
+    const groupIds = [...new Set(groupMembers.map((member) => member.groupId.toString()))];
+
+    res.json({ msg: "Group IDs fetched successfully", groupIds });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};

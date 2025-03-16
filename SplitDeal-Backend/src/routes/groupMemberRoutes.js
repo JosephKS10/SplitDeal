@@ -5,7 +5,9 @@ const {
   createTeamMember,
   deleteTeamMember,
   verifyTeamMember,
-  updateRatingsProvided
+  updateRatingsProvided,
+  getGroupMembersByGroupId,
+  getGroupIdsByUserId,
 } = require("../controllers/groupMemberController");
 
 const authMiddleware = require("../middlewares/authMiddleware");
@@ -24,5 +26,10 @@ router.put("/verify-team-member/:id", authMiddleware, verifyTeamMember);
 
 // 📌 Route to update ratings provided status
 router.put("/update-ratings-provided/:id", authMiddleware, updateRatingsProvided);
+
+router.get("/get-group-members/:groupId", authMiddleware, getGroupMembersByGroupId);
+
+// 📌 Route to get group IDs by user ID
+router.get("/get-group-ids/:userId", authMiddleware, getGroupIdsByUserId);
 
 module.exports = router;
