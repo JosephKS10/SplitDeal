@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ChipTabs from "./ChipTabs";
 import ApiUrls from "../Api/ApiUrls";
 import ModelCreateGroup from "./ModelCreateGroup";
+import axios from "axios";
 
 export default function Deals({ selectedCategory, setSelectedCategory }) {
   const [categories, setCategories] = useState([]);
@@ -13,8 +14,9 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(ApiUrls.getCategory);
-        const data = await response.json();
+        const response = await axios.get(ApiUrls.getCategory);
+        console.log(response);
+        const data = response.data;
         setCategories(data);
 
         if (data.length > 0 && !selectedCategory) {
@@ -36,8 +38,11 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
     }
   }, [selectedCategory]);
 
+
+
   const fetchDeals = async (categoryId) => {
     try {
+      console.log(`${ApiUrls.getDeal}/${categoryId}` + "api")
       const response = await fetch(`${ApiUrls.getDeal}/${categoryId}`);
       const data = await response.json();
       setDeals(data);
@@ -67,7 +72,7 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
           {deals.map((deal) => (
             <div
               key={deal._id}
-              className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm flex flex-col cursor-pointer"
+              className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm flex flex-col "
               onMouseEnter={() => setHoveredDeal(deal._id)}
               onMouseLeave={() => setHoveredDeal(null)}
             >
@@ -104,7 +109,7 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
 
                 <div className="flex items-center flex-wrap mt-1">
                   <button
-                    className="text-orange-500 bg-orange-200 px-3 py-1 rounded-lg inline-flex items-center md:mb-2 lg:mb-0"
+                    className="cursor-pointer text-orange-500 bg-orange-200 px-3 py-1 rounded-lg inline-flex items-center md:mb-2 lg:mb-0"
                     onClick={() => setSelectedDeal(deal)}
                   >
                     Offer

@@ -7,12 +7,9 @@ const ApiUrls = {
     locationSet:`${baseUrl}user/update-location`,
     getCategory:`${baseUrl}category/get-categories`,
     getDeal:`${baseUrl}deal/get-deals-by-category`,
-    getSubCategory:`${baseUrl}sub-category/get-sub-categories`
-
-
+    getSubCategory:`${baseUrl}sub-category/get-sub-categories`,
+    createGroup:`${baseUrl}group/create-group`
 
 }
-
-
 
 export default ApiUrls
