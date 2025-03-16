@@ -1,11 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { LineShadowTextDemo } from './LineShadowTextDemo';
+import axios from 'axios';
 
 const Upload = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [image, setImage] = useState<string | null>(null);
+  const yourToken = localStorage.getItem("userToken");
+  const tokenWithoutQuotes = yourToken?.replace(/^"|"$/g, "");
 
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (Max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File size exceeds 2MB. Please upload a smaller file.");
+      return;
+    }
+
+    const imageUrl = await uploadToCloudinary(file);
+    console.log(imageUrl)
+    if (imageUrl) {
+      setFormData({
+        ...formData,
+        storeLogo: imageUrl,
+      });
+
+    }
+  };
+
+  const uploadToCloudinary = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "UploadProductImage"); // ✅ Ensure this preset exists in Cloudinary
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/du5br7g8b/image/upload",
+        formData
+      );
+      console.log("Cloudinary Upload Response:", response.data);
+      return response.data.url;
+    } catch (error: any) {
+      console.error("Cloudinary upload error:", error.response?.data || error.message);
+      alert(`Upload failed: ${error.response?.data?.error?.message || error.message}`);
+      return null;
+    }
+  };
   // State for form inputs
   const [formData, setFormData] = useState({
     dealName: "",
@@ -51,15 +94,15 @@ const Upload = () => {
   };
 
   // Handle file input change
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({
-        ...formData,
-        storeLogo: file,
-      });
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setFormData({
+  //       ...formData,
+  //       storeLogo: file,
+  //     });
+  //   }
+  // };
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -69,22 +112,21 @@ const Upload = () => {
       dealName: formData.dealName,
       dealDesc: formData.dealDesc,
       categoryId: selectedCategory,
-      subCategoryId: formData.subCategoryId, // Add subCategoryId if needed
+      subCategoryId: "custom", // Add subCategoryId if needed
       storeName: formData.storeName,
       storeLocation: formData.storeLocation,
-      totalValue: parseFloat(formData.totalValue),
-      discount: parseFloat(formData.discount),
+      totalValue: Number(formData.totalValue),
+      discount: Number(formData.discount),
       storeLogo: formData.storeLogo, // You may need to upload this separately and get a URL
       expiryDate: new Date(formData.expiryDate).toISOString(),
     };
-
+    console.log(dealData)
     try {
-      const response = await fetch("https://splitdeal.onrender.com/api/deal/create-deal", {
-        method: "POST",
+      const response = await axios.post("https://splitdeal.onrender.com/api/deal/create-deal",dealData, {
         headers: {
+          Authorization: `Bearer ${tokenWithoutQuotes}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dealData),
       });
 
       if (response.ok) {
@@ -212,7 +254,10 @@ const Upload = () => {
                   <label htmlFor="storeLogo" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                     Upload Brand Image
                   </label>
-                  <label htmlFor="storeLogo" className="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-hidden focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2">
+                  <label
+                    htmlFor="storeLogo"
+                    className="group p-4 sm:p-7 block cursor-pointer text-center border-2 border-dashed border-gray-200 rounded-lg focus-within:outline-hidden focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2"
+                  >
                     <input
                       id="storeLogo"
                       name="storeLogo"
@@ -221,17 +266,33 @@ const Upload = () => {
                       onChange={handleFileChange}
                       required
                     />
-                    <svg className="size-10 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                      <path fillRule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/>
-                      <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                    <svg
+                      className="size-10 mx-auto text-gray-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"
+                      />
+                      <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                     </svg>
                     <span className="mt-2 block text-sm text-gray-800">
                       Browse your device or <span className="group-hover:text-orange-700 text-orange-600">drag 'n drop'</span>
                     </span>
-                    <span className="mt-1 block text-xs text-gray-500">
-                      Maximum file size is 2 MB
-                    </span>
+                    <span className="mt-1 block text-xs text-gray-500">Maximum file size is 2 MB</span>
                   </label>
+
+                  {/* Preview Uploaded Image */}
+                  {image && (
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600">Uploaded Image:</p>
+                      <img src={image} alt="Uploaded" className="mt-2 w-40 h-40 object-cover rounded-lg shadow-md" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Expiry Date and Discount */}
