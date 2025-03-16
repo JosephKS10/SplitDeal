@@ -5,6 +5,7 @@ const {
   updateRating,
   updateSuccessfulOrders,
   updateFailedOrders,
+  getUserDetails
 } = require("../controllers/userController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
@@ -23,5 +24,8 @@ router.put("/successful-order", authMiddleware, updateSuccessfulOrders);
 
 // Update Failed Orders
 router.put("/failed-order", authMiddleware, updateFailedOrders);
+
+router.get("/user/:userId", authMiddleware, getUserDetails);
+
 
 module.exports = router;

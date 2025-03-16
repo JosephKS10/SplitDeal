@@ -1,6 +1,17 @@
 const User = require("../models/User");
 
+exports.getUserDetails = async (req, res) => {
+  try {
+    const { userId } = req.params;
 
+    const user = await User.findById(userId).select("-user_password"); // Exclude password for security
+    if (!user) return res.status(404).json({ msg: "User not found" });
+
+    res.json({ msg: "User details fetched successfully", user });
+  } catch (error) {
+    res.status(500).json({ msg: "Server Error", error });
+  }
+};
 
 // 📌 UPDATE LOCATION
 exports.updateLocation = async (req, res) => {
