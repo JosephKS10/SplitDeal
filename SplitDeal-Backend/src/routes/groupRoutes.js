@@ -16,7 +16,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 router.post("/create-group",authMiddleware, createGroup);
 
 //  Route to get all groups
-router.get("/get-groups",authMiddleware, getAllGroups);
+router.get("/get-groups", getAllGroups);
 
 //  Route to get a group by ID
 router.get("/get-group/:id",authMiddleware, getGroupById);
