@@ -1,5 +1,5 @@
 import discount from '../assets/discount.svg';
-import Promotion from '../assets/Promotion.png';
+// import Promotion from '../assets/Promotion.png';
 import GroupShopping from '../assets/GroupShoping.png';
 import Bags from '../assets/Bags.png';
 export default function BentoGrid() {

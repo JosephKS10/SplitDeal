@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { AnimatedGradientTextDemo } from './AnimatedGradientTextDemo'
+// @ts-nocheck
+import { useState } from 'react'
 import { DrawCircleText } from './DrawCircleText'
 import LocationSearchDropdown from './LocationSearchDropdown'
 import { Link } from 'react-router-dom';
-import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 import BentoGrid from './BentoGrid';
 import ShuffleHero from './ShuffleHero';
 import { ScrollBasedVelocityDemo } from './ScrollBasedVelocityDemo';

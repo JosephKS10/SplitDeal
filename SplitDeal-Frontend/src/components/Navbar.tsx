@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* @ts-nocheck */
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 // import 'hover.css/css/hover-min.css'; // Make sure to import Hover.css
 

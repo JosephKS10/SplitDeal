@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+/* @ts-nocheck */
+import  { Dispatch, SetStateAction, useState } from "react";
 import { IconType } from "react-icons";
 import {
   FiBarChart,

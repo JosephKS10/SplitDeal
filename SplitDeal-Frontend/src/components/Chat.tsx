@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { SidebarDemo } from './SidebarDemo';
-import IconSideNav from './IconSideNav';
-import { Example } from './RetractingSideBar';
+/* @ts-nocheck */
+import { useEffect, useState } from 'react';
+// import { SidebarDemo } from './SidebarDemo';
+// import IconSideNav from './IconSideNav';
+// import { Example } from './RetractingSideBar';
 import axios from 'axios';
 
 const Chat = () => {

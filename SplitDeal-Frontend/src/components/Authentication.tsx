@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+/* @ts-nocheck */
 import { NavLink } from 'react-router-dom'
+// import SignUp from './SignUp'
 
 
 const Authentication = () => {
@@ -12,7 +13,7 @@ const Authentication = () => {
       <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
       <p className="mt-2 text-sm text-gray-600">
         Don't have an account yet?
-        <NavLink to={signup} className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" >
+        <NavLink to="/SignUp" className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" >
           Sign up here
         </NavLink>
       </p>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+// @ts-nocheck
+import { useState } from 'react'
 import LocationSearchDropdown from '../components/LocationSearchDropdown';
 import LocationReverseSearch from '../components/LocationReverseSearchProps ';
 

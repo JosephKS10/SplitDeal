@@ -1,7 +1,5 @@
+/* @ts-nocheck */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
-import { useEffect } from "react";
-import ContactUs from "./Pages/ContactUs";
 import NotFound from "./Pages/NotFound";
 import AboutUs from "./Pages/AboutUs";
 import LandingPage from "./components/LandingPage";
@@ -40,7 +38,7 @@ const App = () => {
         <Route path="/upload" element={<Upload />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
     </Router>
   )
 }

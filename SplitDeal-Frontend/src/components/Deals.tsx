@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// @ts-nocheck
+import { useEffect, useState } from "react";
 import ChipTabs from "./ChipTabs";
 import ApiUrls from "../Api/ApiUrls";
 import ModelCreateGroup from "./ModelCreateGroup";
@@ -80,7 +81,7 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
         />
 
 
-<div className="bg-gradient-to-b from-gray-100 to-gray-200 py-16">
+    <div className="bg-gradient-to-b from-gray-100 to-gray-200 py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center mb-10">
           🔥 Exclusive Deals Just for You

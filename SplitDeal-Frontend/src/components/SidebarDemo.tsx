@@ -1,15 +1,6 @@
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { IconType } from "react-icons";
 import {
-  FiBarChart,
-  FiChevronDown,
   FiChevronsRight,
-  FiDollarSign,
-  FiHome,
-  FiMonitor,
-  FiShoppingCart,
-  FiTag,
-  FiUsers,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import Deals from "./Deals";
@@ -85,8 +76,6 @@ export const Sidebar = ({
 const Option = ({
   title,
   iconUrl,
-  selected,
-  setSelected,
   open,
 }: {
   title: string;

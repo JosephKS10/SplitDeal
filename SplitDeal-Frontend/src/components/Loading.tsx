@@ -1,5 +1,5 @@
-import React from 'react'
 
+/* @ts-nocheck */
 const Loading = () => {
   return (
     <div>

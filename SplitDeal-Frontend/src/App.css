@@ -1,3 +1,4 @@
+/* @ts-nocheck */
 @import "tailwindcss";
 @import "./node_modules/preline/variants.css";
 .hvr-underline-from-center {

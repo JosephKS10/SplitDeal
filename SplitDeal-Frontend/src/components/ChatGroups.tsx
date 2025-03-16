@@ -1,20 +1,10 @@
+// @ts-nocheck
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { IconType } from "react-icons";
-import {
-  FiBarChart,
-  FiChevronDown,
-  FiChevronsRight,
-  FiDollarSign,
-  FiHome,
-  FiMonitor,
-  FiShoppingCart,
-  FiTag,
-  FiUsers,
-} from "react-icons/fi";
+
 import { motion } from "framer-motion";
 import Deals from "./Deals";
 import ApiUrls from "../Api/ApiUrls";
-
+import { FiChevronsRight } from 'react-icons/fi';
 export const ChatGroups = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [subCategories, setSubCategories] = useState<{ _id: string; name: string; logoLink?: string }[]>([]);

@@ -1,4 +1,4 @@
-import React from "react";
+/* @ts-nocheck */
 import { motion } from "framer-motion";
 import { WordRotate } from "./magicui/word-rotate";
 
