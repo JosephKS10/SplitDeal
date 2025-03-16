@@ -129,51 +129,49 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
   };
 
   return (
-    <div className="relative flex flex-col items-center gap-2 w-full">
-      <div className="w-full flex justify-center gap-2">
-        <div className="w-100">
-          <label htmlFor="location-search" className="sr-only">Search location</label>
-          <input
-            id="location-search"
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search location..."
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-          <div>
-            {loading && <p className="text-gray-500 text-sm mt-1">Loading...</p>}
-            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-          </div>
-        </div>
-        <div>
-          <a
-            className="size-13 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-hidden focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
-            href="#"
-            onClick={handleLocationIconClick} // Toggle map visibility or request location
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+    <div className="relative flex flex-col items-center gap-2">
+      
+      <div className="w-full flex flex-col gap-2">
+  <label htmlFor="location-search" className="sr-only">
+    Search location
+  </label>
+  <div className="flex items-center gap-2">
+    <input
+      id="location-search"
+      type="text"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="Search location..."
+      className="flex-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    />
+    <button
+      className="size-13 px-3 inline-flex justify-center items-center text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-none focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div className="flex items-center justify-between">
+    <a className="text-orange-500 flex gap-2 justify-center items-center text-sm cursor-pointer" onClick={handleLocationIconClick}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-locate-fixed"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg> Use my location
+    </a>
+    {loading && <p className="text-gray-500 text-sm">Loading...</p>}
+    {error && <p className="text-red-500 text-sm">{error}</p>}
+  </div>
+</div>
+
 
       {locations.length > 0 && (
         <ul
