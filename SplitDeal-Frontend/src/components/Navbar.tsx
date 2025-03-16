@@ -64,19 +64,19 @@ const Navbar = () => {
           {/* Collapse (Navigation Menu) */}
           <div id="hs-navbar-hcail" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6" aria-labelledby="hs-navbar-hcail-collapse">
             <div className="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-7 lg:mt-0">
-              <NavLink to="/" className="relative inline-block cursor-pointer text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-orange-400">
+              <NavLink to="/" className="relative inline-block text-lg cursor-pointer text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-orange-400">
                 Home
               </NavLink>
-              <NavLink to="/sidebar" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/sidebar" className="inline-block text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Deals
               </NavLink>
-              <NavLink to="/aboutus" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/aboutus" className="inline-block text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 About Us
               </NavLink>
-              <NavLink to="/contactus" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/contactus" className="inline-block text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Contact Us
               </NavLink>
-              <NavLink to="/blog" className="inline-block cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
+              <NavLink to="/blog" className="inline-block text-lg cursor-pointer text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600">
                 Blog
               </NavLink>
             </div>

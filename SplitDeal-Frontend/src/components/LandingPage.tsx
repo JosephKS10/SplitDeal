@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AnimatedBeamDemo } from './AnimatedBeamDemo'
 import BentoGrid from './BentoGrid';
 import ShuffleHero from './ShuffleHero';
+import { ScrollBasedVelocityDemo } from './ScrollBasedVelocityDemo';
 
 interface Location {
   properties: {
@@ -56,9 +57,9 @@ const LandingPage = () => {
             </div> */}
             
           </div>
-          <div className='flex items-center justify-center'>
-            {/* <AnimatedBeamDemo/> */}
-          </div>
+          {/* <div className='flex items-center justify-center'>
+            <AnimatedBeamDemo/>
+          </div> */}
           <div className="text-center pt-2 ">
             {/* <AnimatedGradientTextDemo/> */}
             {/* <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
@@ -107,17 +108,15 @@ const LandingPage = () => {
               <div className=" flex items-center justify-center gap-x-6">
 
                 <Link to="/sidebar" className="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-orange-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-transform duration-300 ease-in-out hover:scale-110"                >
-
                   Explore Deals
                 </Link>
 
-
-                <a
-                  href="#"
+                <Link
+                  to="/upload"
                   className="rounded-md bg-none border-2 border-orange-500 text-orange-500 px-3.5 py-2.5 text-sm font-semibold shadow-xs hover: focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-transform duration-300 ease-in-out hover:scale-110"
                 >
                   Create Deal
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -136,6 +135,8 @@ const LandingPage = () => {
         </div>
 
         </div>
+
+            <ScrollBasedVelocityDemo/>
 
         <BentoGrid/>
         <ShuffleHero/>
