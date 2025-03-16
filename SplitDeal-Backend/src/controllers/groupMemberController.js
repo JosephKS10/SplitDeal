@@ -11,7 +11,7 @@ exports.createAdminGroupMember = async (req, res) => {
       dealId,
       contribution,
       productPhoto,
-      isVerified: true, // Admin is always verified by default
+      isVerified: true, 
       role: "admin"
     });
 

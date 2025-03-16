@@ -8,9 +8,6 @@ const ApiUrls = {
     getCategory:`${baseUrl}category/get-categories`,
     getDeal:`${baseUrl}deal/get-deals-by-category`,
     getSubCategory:`${baseUrl}sub-category/get-sub-categories`
-    
-
-
 
 
 
