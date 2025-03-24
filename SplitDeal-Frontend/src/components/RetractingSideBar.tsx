@@ -1,3 +1,4 @@
+/* @ts-nocheck */
 import { Dispatch, SetStateAction, useState } from "react";
 import { IconType } from "react-icons";
 import {

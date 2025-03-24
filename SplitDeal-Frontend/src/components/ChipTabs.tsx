@@ -15,11 +15,11 @@ interface ChipTabsProps {
 const ChipTabs: React.FC<ChipTabsProps> = ({ categories, selectedCategory, setSelectedCategory }) => {
   return (
     <div>
-      <ul className="flex  items-center space-x-4 p-2">
+      <ul className="flex flex-wrap gap-2 items-center sm:space-x-4 p-2">
         {categories.map((category) => (
           <button
             key={category._id}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`p-2  sm:px-4 sm:py-2 rounded-lg transition-all ${
               selectedCategory === category._id
                 ? "bg-orange-500 text-white font-bold"
                 : "bg-gray-200 hover:bg-gray-300"

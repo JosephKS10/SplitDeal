@@ -65,10 +65,13 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
 
   if (isLoading) {
     return (
-        <>
-          <Loading />
-        </>
-      );
+      <div className="flex-col gap-4 w-full flex items-center justify-center">
+      <div className="w-28 h-28 border-8 p-2 text-orange-400 text-5xl animate-spin border-gray-300 flex items-center justify-center border-t-orange-400 rounded-full">
+        <img src="https://i.ibb.co/4R2kB3sR/image.png" alt="" />
+      </div>
+        Searching the best deals for you...
+    </div>
+    );
   }
 
   return (
@@ -81,14 +84,14 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
         />
 
 
-    <div className="bg-gradient-to-b from-gray-100 to-gray-200 py-16">
+    {/* <div className="bg-gradient-to-b from-gray-100 to-gray-200 py-16"> */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 text-center mb-10">
+        <h2 className="text-3xl py-4 font-bold tracking-tight text-gray-900 text-center mb-10">
           🔥 Exclusive Deals Just for You
         </h2>
 
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {deals.map((deal) => (
+        {deals.slice().reverse().map((deal) => (
             <motion.div
               key={deal._id}
               initial="hidden"
@@ -101,13 +104,13 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
               onMouseLeave={() => setHoveredDeal(null)}
             >
               <motion.div className="relative overflow-hidden rounded-md">
-                <motion.img
-                  src={deal.storeLogo}
-                  alt={deal.dealName}
-                  className="w-full p-8 h-44 object-cover transition-transform duration-300"
-                  whileHover={{ scale: 1.05 }}
-                />
-              </motion.div>
+  <motion.img
+    src={deal.storeLogo}
+    alt={deal.dealName}
+    className="w-full p-4 h-32 object-contain transition-transform duration-300"
+    whileHover={{ scale: 1.05 }}
+  />
+</motion.div>
 
               <div className="mt-5">
                 <h3 className="text-gray-700 text-sm font-medium uppercase tracking-wide">
@@ -140,40 +143,7 @@ export default function Deals({ selectedCategory, setSelectedCategory }) {
           ))}
         </div>
       </div>
-    </div>
-
-
-{/* <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {deals.map((deal) => (
-            <div  key={deal._id} className="group relative" onMouseEnter={() => setHoveredDeal(deal._id)}
-            onMouseLeave={() => setHoveredDeal(null)}>
-              <img
-                src={deal.storeLogo}
-                alt={deal.dealName}
-                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
-              />
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    
-                    <a href={deal.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {deal.dealName}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{deal.color}</p>
-                </div>
-                <p className="text-sm font-medium text-gray-900">{deal.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div> */}
+    {/* </div> */}
 
 
 

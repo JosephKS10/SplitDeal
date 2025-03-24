@@ -4,6 +4,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ApiUrls from "../Api/ApiUrls";
 import ModelGroupMemberAdmin from "./ModelGroupMemberAdmin";
+import { X, Users, Store, MapPin, Tag, Calendar, CirclePercent } from "lucide-react";
+import Alert from "./Alert";
+import { motion } from "framer-motion";
+import { AlertTriangle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Deal {
     _id: string;
@@ -90,47 +95,121 @@ const ModelCreateGroup: React.FC<ModelCreateGroupProps> = ({ selectedDeal, close
             }
         } catch (error: any) {
             console.error("Error creating group:", error.response ? error.response.data : error.message); // Debugging: Log error
-            setStatusMessage("Failed to create the group. Please try again.");
+            setStatusMessage(
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-3 rounded-lg flex items-center gap-2 shadow-lg"
+                >
+                    <AlertTriangle size={20} className="animate-pulse" />
+                    Please log in or sign up to create a deal. <Link to="/signup"><signUp className="underline">Sign Up</signUp></Link>
+                </motion.div>
+            );
             setIsError(true);
         }
     };
 
     return (
         <>
-            <div className="fixed inset-0 bg-opacity-10 flex justify-center items-center z-50 backdrop-blur-md">
-                <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 border border-gray-300 relative">
-                    <button className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-lg" onClick={closeModal}>✖</button>
-                    {!showNextStep ? (
-                        <>
-                            <div className="flex items-center mb-4 gap-3">
-                                <img src={selectedDeal.storeLogo} alt="Deal Logo" className="w-12 h-12 object-contain" />
-                                <h2 className="font-bold">{selectedDeal.dealName}</h2>
-                            </div>
-                            <p className="text-gray-600 mt-2">{selectedDeal.dealDesc}</p>
-                            <div className="mt-4">
-                                <p><strong>Store:</strong> {selectedDeal.storeName}</p>
-                                <p><strong>Location:</strong> {selectedDeal.storeLocation}</p>
-                                <p><strong>Total Value:</strong> ${selectedDeal.totalValue}</p>
-                                <p><strong>Discount:</strong> {selectedDeal.discount}%</p>
-                                <p><strong>Expiry Date:</strong> {new Date(selectedDeal.expiryDate).toLocaleDateString()}</p>
-                            </div>
-                            <div className="mt-4">
-                                <label className="block text-gray-700 font-semibold mb-2">Enter Members Required:</label>
-                                <input type="number" className="w-full border border-gray-300 rounded-md p-2" value={membersRequired} onChange={handleInputChange} min="1" />
-                            </div>
-                            {statusMessage && (
-                                <p className={`mt-4 text-center ${isError ? 'text-red-500' : 'text-green-500'}`}>{statusMessage}</p>
-                            )}
-                            <div className="flex justify-end mt-6">
-                                <button className="mr-4 bg-gray-300 px-4 py-2 rounded-lg" onClick={closeModal}>Close</button>
-                                <button className="bg-orange-500 text-white px-4 py-2 rounded-lg" onClick={handleCreateGroupClick}>Create Group</button>
-                            </div>
-                        </>
-                    ) : (
-                        <ModelGroupMemberAdmin closeModal={closeModal} groupMemberData={groupMemberData}/>
-                    )}
-                </div>
+             <motion.div
+      className="fixed inset-0 bg-white/40 flex justify-center items-center z-50 backdrop-blur-lg"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 border border-gray-800 relative"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100 }}
+      >
+        {/* Close Button */}
+        <button className="absolute top-3 right-3 text-gray-500 hover:text-gray-700  -white" onClick={closeModal}>
+          <X size={24} />
+        </button>
+
+        {!showNextStep ? (
+          <>
+            {/* Deal Header */}
+            <div className="flex items-center mb-4 gap-3">
+              <motion.img
+                src={selectedDeal.storeLogo}
+                alt="Deal Logo"
+                className="w-16 h-16 object-contain rounded-md shadow-sm"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              />
+              
+              <h2 className="font-bold text-lg ">{selectedDeal.dealName}</h2>
             </div>
+
+            {/* Deal Description */}
+            <p className="text-gray-600  mt-2">{selectedDeal.dealDesc}</p>
+
+            {/* Deal Details */}
+            <motion.div
+              className="mt-4 space-y-2 text-gray-700 "
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <p className="flex items-center gap-2"><Store size={18} className="text-orange-500" /> <strong>Store:</strong> {selectedDeal.storeName}</p>
+              <p className="flex items-center gap-2"><MapPin size={18} className="text-blue-500" /> <strong>Location:</strong> {selectedDeal.storeLocation}</p>
+              <p className="flex items-center gap-2"><Tag size={18} className="text-yellow-500" /> <strong>Total Value:</strong> ${selectedDeal.totalValue}</p>
+              <p className="flex items-center gap-2"><CirclePercent size={18} className="text-green-500" /> <strong>Discount:</strong> {selectedDeal.discount}%</p>
+              <p className="flex items-center gap-2"><Calendar size={18} className="text-violet-500" /> <strong>Expiry Date:</strong> <span className="text-red-500 font-semibold">{new Date(selectedDeal.expiryDate).toLocaleDateString()}</span></p>
+            </motion.div>
+
+            {/* Members Required Input */}
+            <div className="mt-4">
+              <label className="block text-gray-700  font-semibold mb-2">Enter Members Required:</label>
+              <motion.input
+                type="number"
+                className="w-full border border-gray -600 rounded-md p-2 -800 "
+                value={membersRequired}
+                onChange={handleInputChange}
+                min="1"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              />
+            </div>
+
+            {/* Status Message */}
+            {statusMessage && (
+              <motion.p
+                className={`mt-4 text-center ${isError ? 'text-red-500' : 'text-green-500'}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                {statusMessage}
+              </motion.p>
+            )}
+
+            {/* Buttons */}
+            <motion.div className="flex justify-end mt-6 gap-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
+              <button className="bg-gray cursor-pointer hover:bg-neutral-200 -700 -gray-600 text-gray-800  px-4 py-2 rounded-lg transition" onClick={closeModal}>
+                Close
+              </button>
+              <motion.button
+                className="bg-gradient-to-r cursor-pointer bg-orange-500  text-white px-4 py-2 rounded-lg shadow-lg transition"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleCreateGroupClick}
+              >
+                Create Group
+              </motion.button>
+            </motion.div>
+          </>
+        ) : (
+          <ModelGroupMemberAdmin closeModal={closeModal} groupMemberData={groupMemberData} />
+        )}
+      </motion.div>
+    </motion.div>
         </>
     );
 };

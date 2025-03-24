@@ -12,6 +12,8 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
     "@floating-ui/react": "^0.27.5",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@preline/accordion": "^3.0.0",
     "@preline/dropdown": "^3.0.0",
     "@preline/file-upload": "^3.0.0",

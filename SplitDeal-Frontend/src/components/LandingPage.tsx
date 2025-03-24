@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import BentoGrid from './BentoGrid';
 import ShuffleHero from './ShuffleHero';
 import { ScrollBasedVelocityDemo } from './ScrollBasedVelocityDemo';
+import HorizontalScrollCarouselDemo from './HorizontalScrollCarousel';
 
 interface Location {
   properties: {
@@ -138,7 +139,8 @@ const LandingPage = () => {
             <ScrollBasedVelocityDemo/>
 
         <BentoGrid/>
-        <ShuffleHero/>
+        {/* <ShuffleHero/> */}
+        <HorizontalScrollCarouselDemo/>
 
       </div>
 
