@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { FormEvent, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import ApiUrls from "../Api/ApiUrls";
-import { Alert } from "./ui/alert";
+import { motion } from "framer-motion";
+import { AlertCircle, Loader2 } from "lucide-react";
 
 interface LoginData {
   email: string;
@@ -78,68 +79,87 @@ const LogIn = () => {
   };
 
   return (
-    <div className="flex justify-center items-center pt-20">
-      <div className="mt-7 max-w-max bg-white border border-gray-200 rounded-xl shadow-2xs">
-        <div className="p-4 sm:p-7">
+    <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8 bg-gray-100">
+      <div className="mt-7 w-full max-w-lg bg-white border border-gray-200 rounded-xl shadow-lg">
+        <div className="p-6 sm:p-8">
+          {/* Header */}
           <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800">Login</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Login</h1>
             <p className="mt-2 text-sm text-gray-600">
               Don't have an account yet?{" "}
-              <NavLink to="/signup" className="text-blue-600 font-medium hover:underline">
+              <NavLink
+                to="/signup"
+                className="text-orange-600 hover:underline font-medium transition-all"
+              >
                 Sign up here
               </NavLink>
             </p>
           </div>
 
+          {/* Alert Messages */}
           <div className="mt-5">
             {alertMessage && (
-              <Alert className={`mb-4 ${alertType === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className={`mb-4 flex items-center gap-2 p-3 rounded-lg border ${alertType === "success" ? "bg-green-100 text-green-700 border-green-300" : "bg-red-100 text-red-700 border-red-300"}`}
+              >
+                {alertType === "error" && <AlertCircle size={18} className="text-red-600" />}
                 {alertMessage}
-              </Alert>
+              </motion.div>
             )}
-
-            <form onSubmit={handleSubmit}>
-              <div className="grid gap-y-4">
-                <div>
-                  <label htmlFor="email" className="block text-sm mb-2">Email address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="py-2.5 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="password" className="block text-sm mb-2">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="py-2.5 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 px-4 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 flex justify-center items-center"
-                  disabled={isLoading} // Disable button when loading
-                >
-                  {isLoading ? (
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> // Loader animation
-                  ) : (
-                    "Sign in"
-                  )}
-                </button>
-              </div>
-            </form>
           </div>
+
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email Field */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="py-2.5 px-4 w-full border-gray-300 rounded-lg border-2 sm:text-sm focus:border-orange-500 focus:ring-orange-500 transition-all duration-200"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="py-2.5 px-4 w-full border-gray-300 rounded-lg border-2 sm:text-sm focus:border-orange-500 focus:ring-orange-500 transition-all duration-200"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              whileTap={{ scale: 0.97 }}
+              className="w-full py-3 px-4 text-sm font-medium rounded-lg bg-orange-600 text-white hover:bg-orange-700 transition-all duration-200 flex justify-center items-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader2 className="animate-spin h-5 w-5" />
+              ) : (
+                "Sign in"
+              )}
+            </motion.button>
+          </form>
         </div>
       </div>
     </div>

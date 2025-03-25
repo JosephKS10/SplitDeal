@@ -1,7 +1,8 @@
-// @ts-nocheck
+// ts-ignore
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ApiUrls from "../Api/ApiUrls";
+import { Link } from "react-router-dom";
 
 const ORS_API_KEY = "5b3ce3597851110001cf62488d8c0611747a4fd18528e23d079d839b"; // Replace with your OpenRouteService API key
 
@@ -171,8 +172,9 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
             placeholder="Search location..."
             className="flex-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
-          <button
-            className="size-13 px-3 inline-flex justify-center items-center text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-none focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
+          <Link to="/sidebar">
+    <button
+            className="size-13 cursor-pointer px-3 inline-flex justify-center items-center text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-none focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -189,10 +191,11 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
               />
             </svg>
           </button>
-        </div>
+          </Link>
+  </div>
         <div className="flex items-center justify-between">
           <a className="text-orange-500 flex gap-2 justify-center items-center text-sm cursor-pointer" onClick={handleLocationIconClick}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-locate-fixed"><line x1="2" x2="5" y1="12" y2="12" /><line x1="19" x2="22" y1="12" y2="12" /><line x1="12" x2="12" y1="2" y2="5" /><line x1="12" x2="12" y1="19" y2="22" /><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="3" /></svg> Use my location
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-locate-fixed"><line x1="2" x2="5" y1="12" y2="12" /><line x1="19" x2="22" y1="12" y2="12" /><line x1="12" x2="12" y1="2" y2="5" /><line x1="12" x2="12" y1="19" y2="22" /><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="3" /></svg> Use my location
           </a>
           {loading && <p className="text-gray-500 text-sm">Loading...</p>}
           {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -218,20 +221,21 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
       )}
 
       {/* Render the map only when the user clicks the location icon and has location */}
-      {mapVisible && currentLocation && (
-        <div className="mt-4 w-full">
-          <iframe
-            src={`https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}&z=15&output=embed`}
-            style={{
-              width: "100%",
-              height: "320px",
-              border: "none",
-            }}
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
-        </div>
-      )}
+      {mapVisible && currentLocation?.lat && currentLocation?.lng && (
+  <div className="mt-4 w-full">
+    <iframe
+      src={`https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}&z=15&output=embed`}
+      style={{
+        width: "100%",
+        height: "320px",
+        border: "none",
+      }}
+      allowFullScreen
+      loading="lazy"
+    ></iframe>
+  </div>
+)}
+
 
       {/* Show location permission error if any */}
       {locationError && <p className="text-red-500 text-sm mt-1">{locationError}</p>}

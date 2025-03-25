@@ -112,7 +112,7 @@ const ModelGroupMemberAdmin: React.FC<ModelGroupMemberAdminProps> = ({ closeModa
             />
 
             <label className="block mb-2">Upload Product Image:</label>
-            <input type="file" onChange={handleFileChange} className="mb-4" />
+            <input type="file" onChange={handleFileChange} className="border-2 border-dotted p-5" />
 
             <div className="flex justify-end mt-6">
                 <button

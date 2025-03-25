@@ -1,4 +1,4 @@
-/* @ts-nocheck */
+// @ts-nocheck
 import { useEffect, useState } from 'react';
 // import { SidebarDemo } from './SidebarDemo';
 // import IconSideNav from './IconSideNav';

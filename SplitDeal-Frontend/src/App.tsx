@@ -12,8 +12,9 @@ import Chat from "./components/Chat";
 import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import Footer from "./components/Footer";
-import LoginIn from "./components/LoginIn";
 import Groups from "./components/Groups";
+// import NavbarNew from "./components/NavbarNew";
+
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -33,7 +34,6 @@ const App = () => {
         <Route path="/sidebar" element={<SidebarDemo />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/groups" element={<Groups />} />
-        <Route path="/loginin" element={<LoginIn />} />
         <Route path="/signup/login" element={<LogIn />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="*" element={<NotFound />} />
