@@ -13,7 +13,7 @@ import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import Footer from "./components/Footer";
 import Groups from "./components/Groups";
-import NavbarNew from "./components/NavbarNew";
+// import NavbarNew from "./components/NavbarNew";
 
 declare global {
   interface Window {

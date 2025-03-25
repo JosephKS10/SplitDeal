@@ -126,7 +126,7 @@ const ModelCreateGroup: React.FC<ModelCreateGroupProps> = ({ selectedDeal, close
         transition={{ type: "spring", stiffness: 100 }}
       >
         {/* Close Button */}
-        <button className="absolute top-3 right-3 text-gray-500 hover:text-gray-700  -white" onClick={closeModal}>
+        <button className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700  -white" onClick={closeModal}>
           <X size={24} />
         </button>
 

@@ -33,7 +33,7 @@ const Groups = () => {
           <div className="lg:max-w-lg">
             <h2 className="text-base/7 font-semibold text-orange-500">FIND & SAVE</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-              Find Groups
+              Find Deals
             </p>
             <p className="py-10 text-lg/8  text-gray-600">
               Looking for the best deals but don’t want to shop alone? With SplitDeal’s Group Buying, you can team up with other shoppers, share exclusive deals, and unlock bigger discounts together!
@@ -71,7 +71,7 @@ const Groups = () => {
                     {product.dealTitle}
                   </a>
                 </h3>
-                <p className="py-2 text-sm text-gray-500">Until - 
+                <p className="py-3 text-sm text-gray-500">Until - 
                 <span className="font-bold text-red-500 pl-1">
   {new Date(product.expiryDate).toLocaleDateString("en-US", {
     weekday: "short", // abbreviated weekday (Mon)
@@ -80,19 +80,22 @@ const Groups = () => {
     day: "numeric",
   })}
    </span>
+
 </p>
-<div className='pt-2 cursor-pointer'>
-  <Link to="/chat">
-<button className="cursor-pointer  flex items-center fill-orange-400 bg-orange-100 hover:bg-orange-900 active:border active:border-orange-400 rounded-md duration-100 p-2">
-  {/* <svg viewBox="0 -0.5 25 25" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" d="M18.507 19.853V6.034C18.5116 5.49905 18.3034 4.98422 17.9283 4.60277C17.5532 4.22131 17.042 4.00449 16.507 4H8.50705C7.9721 4.00449 7.46085 4.22131 7.08577 4.60277C6.7107 4.98422 6.50252 5.49905 6.50705 6.034V19.853C6.45951 20.252 6.65541 20.6407 7.00441 20.8399C7.35342 21.039 7.78773 21.0099 8.10705 20.766L11.907 17.485C12.2496 17.1758 12.7705 17.1758 13.113 17.485L16.9071 20.767C17.2265 21.0111 17.6611 21.0402 18.0102 20.8407C18.3593 20.6413 18.5551 20.2522 18.507 19.853Z" clip-rule="evenodd" fill-rule="evenodd"></path>
-  </svg> */}
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="orange" fill="none" strokeLinejoin="round" strokeLinecap="round" strokeWidth="3" className="lucide lucide-message-circle pr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-  <span className="text-sm text-orange-400 font-bold px-1 cursor-pointer">Join Group</span>
+
+
+
+<button class="cursor-pointer flex items-center fill-lime-400 bg-lime-100 hover:bg-lime-900 active:border active:border-lime-400 rounded-md duration-100 p-2">
+  <svg viewBox="0 -0.5 25 25" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" d="M18.507 19.853V6.034C18.5116 5.49905 18.3034 4.98422 17.9283 4.60277C17.5532 4.22131 17.042 4.00449 16.507 4H8.50705C7.9721 4.00449 7.46085 4.22131 7.08577 4.60277C6.7107 4.98422 6.50252 5.49905 6.50705 6.034V19.853C6.45951 20.252 6.65541 20.6407 7.00441 20.8399C7.35342 21.039 7.78773 21.0099 8.10705 20.766L11.907 17.485C12.2496 17.1758 12.7705 17.1758 13.113 17.485L16.9071 20.767C17.2265 21.0111 17.6611 21.0402 18.0102 20.8407C18.3593 20.6413 18.5551 20.2522 18.507 19.853Z" clip-rule="evenodd" fill-rule="evenodd"></path>
+  </svg>
+  <span class="text-sm px-2 text-lime-500 font-semibold">Join Now</span>
 </button>
-</Link>
-</div>
+
+
+
               </div>
+              
               <p className="text-sm font-bold text-green-500">{product.discount}%</p>
             </div>
           </div>

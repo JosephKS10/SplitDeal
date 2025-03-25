@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ApiUrls from "../Api/ApiUrls";
+import { Link } from "react-router-dom";
 
 const ORS_API_KEY = "5b3ce3597851110001cf62488d8c0611747a4fd18528e23d079d839b"; // Replace with your OpenRouteService API key
 
@@ -145,8 +146,9 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
       placeholder="Search location..."
       className="flex-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
     />
+    <Link to="/sidebar">
     <button
-      className="size-13 px-3 inline-flex justify-center items-center text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-none focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
+      className="size-13 cursor-pointer px-3 inline-flex justify-center items-center text-sm font-medium rounded-lg border border-transparent bg-orange-600 text-white hover:bg-orange-700 focus:outline-none focus:bg-orange-700 disabled:opacity-50 disabled:pointer-events-none"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -163,6 +165,7 @@ const LocationSearchDropdown: React.FC<LocationSearchDropdownProps> = ({ onSelec
         />
       </svg>
     </button>
+    </Link>
   </div>
   <div className="flex items-center justify-between">
     <a className="text-orange-500 flex gap-2 justify-center items-center text-sm cursor-pointer" onClick={handleLocationIconClick}>

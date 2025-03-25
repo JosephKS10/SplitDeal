@@ -19,7 +19,7 @@ const ChipTabs: React.FC<ChipTabsProps> = ({ categories, selectedCategory, setSe
         {categories.map((category) => (
           <button
             key={category._id}
-            className={`p-2  sm:px-4 sm:py-2 rounded-lg transition-all ${
+            className={`p-2  sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-all ${
               selectedCategory === category._id
                 ? "bg-orange-500 text-white font-bold"
                 : "bg-gray-200 hover:bg-gray-300"

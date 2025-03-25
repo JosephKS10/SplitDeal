@@ -28,7 +28,7 @@ const Teams = () => {
       </div>
 
       <p className="mt-3 text-gray-500">
-        I am an ambitious workaholic, but apart from that, pretty simple person.
+        I am an ambitious workaholic, but apart from that, I love reviewing websites on <a className="underline text-blue-500" href="https://www.awwwards.com">Awwwards</a>.
       </p>
 
       {/* Social Brands */}
@@ -68,7 +68,7 @@ const Teams = () => {
       </div>
 
       <p className="mt-3 text-gray-500">
-        I am an ambitious workaholic, but apart from that, pretty simple person.
+      Ambition drives us, but at our core, I'm just pretty simple person
       </p>
 
       {/* Social Brands */}
@@ -102,7 +102,7 @@ const Teams = () => {
             Gaurav Myana
           </h3>
           <p className="text-xs uppercase text-gray-500">
-            Frontend Developer
+            API Developer
           </p>
         </div>
         
@@ -110,7 +110,7 @@ const Teams = () => {
       
 
       <p className="mt-3 text-gray-500">
-        I am an ambitious workaholic, but apart from that, pretty simple person.
+        I'm always striving for more, but beyond that, I love to play with API's.
       </p>
       <div className="mt-3 space-x-1">
         <a className="inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="https://github.com/https://github.com/225108954">
@@ -142,13 +142,13 @@ const Teams = () => {
             Parth Vaghela
           </h3>
           <p className="text-xs uppercase text-gray-500">
-            Backend Engineer
+            Backend Engineer / Content Creator
           </p>
         </div>
       </div>
 
       <p className="mt-3 text-gray-500">
-        I am an ambitious workaholic, but apart from that, pretty simple person.
+      My friends think I'm an extrovert, but deep down I know I'm just a 'commit' to my introverted side(MERN)
       </p>
 
       {/* Social Brands */}
