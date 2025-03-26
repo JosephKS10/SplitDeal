@@ -192,7 +192,6 @@ const Chat = () => {
           <div className="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto text-center">
             <a
               className="inline-block mb-4 flex-none focus:outline-hidden focus:opacity-80"
-              href="../examples/html/ai-with-sidebar.html"
               aria-label="SplitDeal"
             >
               <img

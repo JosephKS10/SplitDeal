@@ -16,7 +16,7 @@ const Teams = () => {
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <div className="flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200">
       <div className="flex items-center gap-x-4">
-        <img className="rounded-full size-20" src="https://media-syd2-1.cdn.whatsapp.net/v/t61.24694-24/473412294_608631751891263_2182870115790911644_n.jpg?ccb=11-4&oh=01_Q5AaIVdIAuJK1Yp7sSopxOtfBoL4v_-3k-y_yfzmD7X0acZA&oe=67E28A10&_nc_sid=5e03e0&_nc_cat=111" alt="Avatar" />
+        <img className="rounded-full size-20" src="https://avatars.githubusercontent.com/ayushindapure" alt="Avatar" />
         <div className="grow">
           <h3 className="font-medium text-gray-800">
             Ayush Indapure
@@ -56,7 +56,7 @@ const Teams = () => {
 
     <div className="flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200">
       <div className="flex items-center gap-x-4">
-        <img className="rounded-full size-20" src="https://media-syd2-1.cdn.whatsapp.net/v/t61.24694-24/473400618_1275053703754127_319396312500690311_n.jpg?ccb=11-4&oh=01_Q5AaIYSyZUaBwCvURPUpxcBD__9gWaeLNiFRf0V6vToLn7y2&oe=67E27AD2&_nc_sid=5e03e0&_nc_cat=102" alt="Avatar" />
+        <img className="rounded-full size-20" src="https://avatars.githubusercontent.com/u/77894439?v=4" alt="Avatar" />
         <div className="grow">
           <h3 className="font-medium text-gray-800">
             Joseph
@@ -96,7 +96,7 @@ const Teams = () => {
 
     <div className="flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200">
       <div className="flex items-center gap-x-4">
-        <img className="rounded-full size-20" src="https://media-syd2-1.cdn.whatsapp.net/v/t61.24694-24/473403636_618367557471539_9175543388663466516_n.jpg?ccb=11-4&oh=01_Q5AaIZ9lEBgAz9GEdhsDm1DG2OMIGoXear-fmaiP62AuoC_F&oe=67E296BC&_nc_sid=5e03e0&_nc_cat=107" alt="Avatar" />
+        <img className="rounded-full size-20" src="https://i.ibb.co/zh6SWyk9/image.png" alt="Avatar" />
         <div className="grow">
           <h3 className="font-medium text-gray-800">
             Gaurav Myana
@@ -136,7 +136,7 @@ const Teams = () => {
 
     <div className="flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200">
       <div className="flex items-center gap-x-4">
-        <img className="rounded-full size-20" src="https://media-syd2-1.cdn.whatsapp.net/v/t61.24694-24/473400173_1780561332763225_8861149081992167371_n.jpg?ccb=11-4&oh=01_Q5AaIWmKOihKutkLb0ohUgMPHdD2QAqy_rj_t5Fu9NrEMcSk&oe=67E24096&_nc_sid=5e03e0&_nc_cat=101" alt="Avatar" />
+        <img className="rounded-full size-20" src="https://avatars.githubusercontent.com/vaghelaparth05" alt="Avatar" />
         <div className="grow">
           <h3 className="font-medium text-gray-800">
             Parth Vaghela
